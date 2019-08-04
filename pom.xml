@@ -14,13 +14,14 @@
         <module>RopeV2-MC1.14.4</module>
     </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.esotericsoftware</groupId>
-            <artifactId>reflectasm</artifactId>
-            <version>1.11.9</version>
-        </dependency>
-    </dependencies>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.esotericsoftware</groupId>
+                <artifactId>reflectasm</artifactId>
+                <version>1.11.9</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
