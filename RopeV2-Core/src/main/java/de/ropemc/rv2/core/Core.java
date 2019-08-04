@@ -1,6 +1,7 @@
 package de.ropemc.rv2.core;
 
-import de.ropemc.rv2.core.mod.ModLoader;
+
+import de.ropemc.rv2.mc114.HookTransformer;
 
 import java.io.File;
 import java.lang.instrument.Instrumentation;
@@ -10,7 +11,8 @@ public class Core {
 
     public static void premain(String args, Instrumentation instrumentation){
         if (!mainFolder.exists()) mainFolder.mkdir();
-        ModLoader modLoader = new ModLoader();
+        //ModLoader modLoader = new ModLoader();
+        instrumentation.addTransformer(new HookTransformer());
     }
 
 }

@@ -22,6 +22,12 @@
             <artifactId>gson</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>de.ropemc</groupId>
+            <artifactId>RopeV2-MC1.14.4</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

@@ -12,6 +12,7 @@
         <module>RopeV2-API</module>
         <module>RopeV2-Core</module>
         <module>RopeV2-MC1.14.4</module>
+        <module>RopeV2-Util</module>
     </modules>
 
     <dependencyManagement>
@@ -34,6 +35,11 @@
             <dependency>
                 <groupId>de.ropemc</groupId>
                 <artifactId>RopeV2-API</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>de.ropemc</groupId>
+                <artifactId>RopeV2-Util</artifactId>
                 <version>1.0</version>
             </dependency>
         </dependencies>
