@@ -10,7 +10,7 @@
     <version>1.0</version>
     <modules>
         <module>RopeV2-API</module>
-        <module>RopeV2-Core</module>
+        <module>RopeV2-Loader</module>
         <module>RopeV2-MC1.14.4</module>
         <module>RopeV2-Util</module>
     </modules>

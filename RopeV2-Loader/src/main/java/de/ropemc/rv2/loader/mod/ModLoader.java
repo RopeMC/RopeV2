@@ -1,7 +1,5 @@
 package de.ropemc.rv2.loader.mod;
 
-import de.ropemc.rv2.loader.Main;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URLClassLoader;
@@ -14,10 +12,11 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
 public class ModLoader {
-    private static File modFolder = new File(Main.mainFolder, "Mods");
+    private File modFolder;
     private List<Mod> mods;
 
-    public ModLoader() {
+    public ModLoader(File modFolder) {
+        this.modFolder = modFolder;
         if (!modFolder.exists()) modFolder.mkdir();
         mods = Arrays.stream(Objects.requireNonNull(modFolder.listFiles()))
                 .filter(File::isFile)
