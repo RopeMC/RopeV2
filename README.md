@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/RopeMC/RopeV2.svg?branch=master)](https://travis-ci.org/RopeMC/RopeV2)
 # RopeV2
 Another attempt on RopeMC
 This version of Rope is still using a javaagent and the instrumentation api, but doesn't use the old wrapper system anymore.
