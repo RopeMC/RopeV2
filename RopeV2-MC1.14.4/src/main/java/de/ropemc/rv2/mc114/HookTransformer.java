@@ -15,7 +15,7 @@ public class HookTransformer implements ClassFileTransformer {
     public HookTransformer() {
         JFrame frame = new JFrame();
         JButton button = new JButton("Klick mich");
-        button.addActionListener(e -> button.setText("" + minecraft.getPlayer().getHealth()));
+        button.addActionListener(e -> minecraft.getPlayer().setHealth(10));
         frame.add(button);
         frame.setVisible(true);
     }
@@ -24,13 +24,14 @@ public class HookTransformer implements ClassFileTransformer {
         if ("cyc".equals(s)) {
             try {
                 ClassPool cp = ClassPool.getDefault();
+                cp.importPackage("de.ropemc.rv2.mc114");
                 CtClass cc = cp.get("cyc");
                 CtMethod runMethod = cc.getDeclaredMethod("b");
-                runMethod.insertBefore("{System.out.println(1337);}");
+                runMethod.insertBefore("{HookTransformer.setMinecraft(this);}");
                 byte[] byteCode = cc.toBytecode();
                 cc.detach();
                 return byteCode;
-            } catch (NotFoundException | CannotCompileException | IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

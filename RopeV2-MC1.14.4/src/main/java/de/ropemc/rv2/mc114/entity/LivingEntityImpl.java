@@ -7,7 +7,7 @@ public class LivingEntityImpl extends EntityImpl implements LivingEntity {
     private static ReflectAccessor accessor = ReflectAccessor.getByName("aix");
 
     private static int mGetHealth = accessor.getMethodAcess().getIndex("cD");
-    private static int mSetHealth = accessor.getMethodAcess().getIndex("c");
+    private static int mSetHealth = accessor.getMethodAcess().getIndex("c", float.class);
 
     public LivingEntityImpl(Object handle) {
         super(handle);
@@ -18,10 +18,10 @@ public class LivingEntityImpl extends EntityImpl implements LivingEntity {
     }
 
     public float getHealth() {
-        return float.class.cast(accessor.getMethodAcess().invoke(this.handle, mGetHealth));
+        return (float) accessor.getMethodAcess().invoke(this.handle, mGetHealth);
     }
 
     public void setHealth(float health) {
-        accessor.getMethodAcess().invoke(this.handle, mSetHealth,  health);
+        accessor.getMethodAcess().invoke(this.handle, mSetHealth, health);
     }
 }
