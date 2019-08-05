@@ -9,8 +9,4 @@ public class PlayerImpl extends LivingEntityImpl implements Player {
     public PlayerImpl(Object handle) {
         super(handle);
     }
-
-    public int getHurtTime() {
-        return 0;
-    }
 }
