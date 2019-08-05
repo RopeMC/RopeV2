@@ -1,6 +1,6 @@
-package de.ropemc.rv2.mc114.entity;
+package de.ropemc.rv2.mc114.minecraft.client.entity.player;
 
-import de.ropemc.rv2.api.entity.ClientPlayerEntity;
+import de.ropemc.rv2.api.minecraft.client.entity.player.ClientPlayerEntity;
 import de.ropemc.rv2.util.ReflectAccessor;
 
 public class ClientPlayerEntityImpl extends AbstractClientPlayerEntityImpl implements ClientPlayerEntity {

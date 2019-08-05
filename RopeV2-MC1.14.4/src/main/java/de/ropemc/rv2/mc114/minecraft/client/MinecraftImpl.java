@@ -1,8 +1,8 @@
-package de.ropemc.rv2.mc114;
+package de.ropemc.rv2.mc114.minecraft.client;
 
-import de.ropemc.rv2.api.Minecraft;
-import de.ropemc.rv2.api.entity.ClientPlayerEntity;
-import de.ropemc.rv2.mc114.entity.ClientPlayerEntityImpl;
+import de.ropemc.rv2.api.minecraft.client.Minecraft;
+import de.ropemc.rv2.api.minecraft.client.entity.player.ClientPlayerEntity;
+import de.ropemc.rv2.mc114.minecraft.client.entity.player.ClientPlayerEntityImpl;
 import de.ropemc.rv2.util.ReflectAccessor;
 
 public class MinecraftImpl implements Minecraft {

@@ -4,14 +4,23 @@ import com.esotericsoftware.reflectasm.FieldAccess;
 import com.esotericsoftware.reflectasm.MethodAccess;
 
 public class ReflectAccessor {
+
     private Class<?> clazz;
     private FieldAccess fieldAccess;
-    private MethodAccess methodAcess;
+    private MethodAccess methodAccess;
+    private ConstructorAccess constructorAccess;
 
     public ReflectAccessor(Class<?> clazz) {
+        this(clazz, true, true);
+    }
+
+    public ReflectAccessor(Class<?> clazz, boolean fields, boolean methods) {
         this.clazz = clazz;
-        this.fieldAccess = FieldAccess.get(this.clazz);
-        this.methodAcess = MethodAccess.get(this.clazz);
+        if(fields)
+            this.fieldAccess = FieldAccess.get(this.clazz);
+        if(methods)
+            this.methodAccess = MethodAccess.get(this.clazz);
+        constructorAccess = new ConstructorAccess(this.clazz);
     }
 
     public static ReflectAccessor getByName(String name) {
@@ -32,7 +41,12 @@ public class ReflectAccessor {
         return fieldAccess;
     }
 
-    public MethodAccess getMethodAcess() {
-        return methodAcess;
+    public MethodAccess getMethodAccess() {
+        return methodAccess;
     }
+
+    public ConstructorAccess getConstructorAccess(){
+        return constructorAccess;
+    }
+
 }

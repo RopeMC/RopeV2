@@ -1,16 +1,13 @@
-package de.ropemc.rv2.mc114;
+package de.ropemc.rv2.mc114.transformer;
 
 import de.ropemc.rv2.api.ClassTransformer;
-import de.ropemc.rv2.api.Minecraft;
+import de.ropemc.rv2.api.minecraft.client.Minecraft;
 import de.ropemc.rv2.api.Rope;
+import de.ropemc.rv2.mc114.minecraft.client.MinecraftImpl;
 import javassist.*;
 
 import javax.swing.*;
-import java.io.IOException;
-import java.lang.instrument.ClassFileTransformer;
-import java.lang.instrument.IllegalClassFormatException;
 import java.lang.reflect.Field;
-import java.security.ProtectionDomain;
 
 public class HookTransformer implements ClassTransformer {
 
@@ -22,22 +19,18 @@ public class HookTransformer implements ClassTransformer {
         frame.setVisible(true);
     }
 
-    public byte[] transform(String s) {
-        if ("cyc".equals(s)) {
-            try {
-                ClassPool cp = ClassPool.getDefault();
-                cp.importPackage("de.ropemc.rv2.mc114");
-                CtClass cc = cp.get("cyc");
-                CtMethod runMethod = cc.getDeclaredMethod("b");
-                runMethod.insertBefore("{HookTransformer.setMinecraft(this);}");
-                byte[] byteCode = cc.toBytecode();
-                cc.detach();
-                return byteCode;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public String[] getTransformedClasses() {
+        return new String[]{"cyc"};
+    }
+
+    public void transform(CtClass cc) {
+        try {
+            cc.getClassPool().importPackage("de.ropemc.rv2.mc114");
+            CtMethod runMethod = cc.getDeclaredMethod("b");
+            runMethod.insertBefore("{HookTransformer.setMinecraft(this);}");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return null;
     }
 
     public static void setMinecraft(Object object) {

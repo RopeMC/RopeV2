@@ -1,5 +1,8 @@
 package de.ropemc.rv2.api;
 
+import javassist.CtClass;
+
 public interface ClassTransformer {
-    byte[] transform(String className);
+    String[] getTransformedClasses();
+    void transform(CtClass ctClass);
 }

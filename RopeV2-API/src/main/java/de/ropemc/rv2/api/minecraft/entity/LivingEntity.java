@@ -1,4 +1,4 @@
-package de.ropemc.rv2.api.entity;
+package de.ropemc.rv2.api.minecraft.entity;
 
 public interface LivingEntity extends Entity {
 
