@@ -11,10 +11,6 @@ public class RopeMCImpl implements RopeMC {
         return minecraft;
     }
 
-    public void setMinecraft(Minecraft minecraft){
-        this.minecraft = minecraft;
-    }
-
     private HookTransformer transformer = new HookTransformer();
 
     public byte[] transform(String className){
