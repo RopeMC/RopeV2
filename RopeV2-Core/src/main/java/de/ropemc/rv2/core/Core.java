@@ -7,6 +7,7 @@ import java.io.File;
 import java.lang.instrument.Instrumentation;
 
 public class Core {
+
     public static File mainFolder = new File("RopeV2");
 
     public static void premain(String args, Instrumentation instrumentation){
