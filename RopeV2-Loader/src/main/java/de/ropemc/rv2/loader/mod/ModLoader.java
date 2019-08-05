@@ -1,6 +1,6 @@
-package de.ropemc.rv2.core.mod;
+package de.ropemc.rv2.loader.mod;
 
-import de.ropemc.rv2.core.Core;
+import de.ropemc.rv2.loader.Main;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
 public class ModLoader {
-    private static File modFolder = new File(Core.mainFolder, "Mods");
+    private static File modFolder = new File(Main.mainFolder, "Mods");
     private List<Mod> mods;
 
     public ModLoader() {

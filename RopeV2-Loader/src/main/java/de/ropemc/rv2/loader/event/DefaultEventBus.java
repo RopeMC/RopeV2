@@ -1,4 +1,4 @@
-package de.ropemc.rv2.core.event;
+package de.ropemc.rv2.loader.event;
 
 import de.ropemc.rv2.api.event.Event;
 import de.ropemc.rv2.api.event.EventBus;

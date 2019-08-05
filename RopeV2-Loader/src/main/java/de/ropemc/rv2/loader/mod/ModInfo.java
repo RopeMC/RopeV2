@@ -1,4 +1,4 @@
-package de.ropemc.rv2.core.mod;
+package de.ropemc.rv2.loader.mod;
 
 public class ModInfo {
     private String name;

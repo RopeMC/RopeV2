@@ -1,5 +1,6 @@
 package de.ropemc.rv2.mc114;
 
+import de.ropemc.rv2.api.ClassTransformer;
 import de.ropemc.rv2.api.Minecraft;
 import javassist.*;
 
@@ -9,7 +10,7 @@ import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
 
-public class HookTransformer implements ClassFileTransformer {
+public class HookTransformer implements ClassTransformer {
     private static Minecraft minecraft;
 
     public HookTransformer() {
@@ -20,7 +21,7 @@ public class HookTransformer implements ClassFileTransformer {
         frame.setVisible(true);
     }
 
-    public byte[] transform(ClassLoader loader, String s, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
+    public byte[] transform(String s) {
         if ("cyc".equals(s)) {
             try {
                 ClassPool cp = ClassPool.getDefault();
@@ -35,7 +36,6 @@ public class HookTransformer implements ClassFileTransformer {
                 e.printStackTrace();
             }
         }
-
         return null;
     }
 
