@@ -4,6 +4,7 @@ import de.ropemc.rv2.api.minecraft.entity.LivingEntity;
 import de.ropemc.rv2.util.ReflectAccessor;
 
 public class LivingEntityImpl extends EntityImpl implements LivingEntity {
+
     private static ReflectAccessor accessor = ReflectAccessor.getByName("aix");
 
     private static int mGetHealth = accessor.getMethodAccess().getIndex("cD");
@@ -15,6 +16,10 @@ public class LivingEntityImpl extends EntityImpl implements LivingEntity {
     }
 
     public int getHurtTime() {
+        if(this.handle == null){
+            System.out.println("Handle is null");
+            return 0;
+        }
         return (int) accessor.getFieldAccess().get(this.handle, fHurtTime);
     }
 

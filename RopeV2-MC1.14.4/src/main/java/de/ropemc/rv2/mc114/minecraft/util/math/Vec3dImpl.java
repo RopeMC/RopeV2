@@ -7,9 +7,9 @@ public class Vec3dImpl implements Vec3d.Wrapper {
 
     private static ReflectAccessor accessor = ReflectAccessor.getByName("csi");
     private static int cVec3d = accessor.getConstructorAccess().getIndex(double.class, double.class, double.class);
-    private static int mGetX = accessor.getMethodAccess().getIndex("b");
-    private static int mGetY = accessor.getMethodAccess().getIndex("c");
-    private static int mGetZ = accessor.getMethodAccess().getIndex("d");
+    private static int mGetX = accessor.getMethodAccess().getIndex("a", new Class[0]);
+    private static int mGetY = accessor.getMethodAccess().getIndex("b", new Class[0]);
+    private static int mGetZ = accessor.getMethodAccess().getIndex("c", new Class[0]);
 
     private Object handle;
 
@@ -22,15 +22,17 @@ public class Vec3dImpl implements Vec3d.Wrapper {
     }
 
     public double getX() {
-        return (int) accessor.getMethodAccess().invoke(handle, mGetX);
+        return (double) accessor
+                .getMethodAccess()
+                .invoke(handle, mGetX);
     }
     public double getY() {
-        return (int) accessor.getMethodAccess().invoke(handle, mGetY);
+        return (double) accessor.getMethodAccess().invoke(handle, mGetY);
     }
     public double getZ() {
-        return (int) accessor.getMethodAccess().invoke(handle, mGetZ);
+        return (double) accessor.getMethodAccess().invoke(handle, mGetZ);
     }
-    
+
     public Object getHandle() {
         return handle;
     }
