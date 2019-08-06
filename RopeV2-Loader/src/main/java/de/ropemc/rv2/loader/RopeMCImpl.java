@@ -105,7 +105,7 @@ public class RopeMCImpl implements RopeMC {
         addTransformer(new HookTransformer());
         addTransformer(new GameLoopTransformer());
         addTransformer(new IngameGuiTransformer());
-        addTransformer(new ClientPlayerEntityTransformer());
+        //addTransformer(new ClientPlayerEntityTransformer());
         System.out.println("Hello World from RopeV2");
     }
 

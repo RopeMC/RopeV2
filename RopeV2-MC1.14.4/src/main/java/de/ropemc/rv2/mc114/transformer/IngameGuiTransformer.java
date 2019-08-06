@@ -11,12 +11,10 @@ public class IngameGuiTransformer implements ClassTransformer {
 
     public void transform(CtClass cc) {
         try {
-            cc.getClassPool().importPackage("de.ropemc.rv2.api");
-            cc.getClassPool().importPackage("de.ropemc.rv2.api.event");
-            cc.getClassPool().importPackage("de.ropemc.rv2.api.event.render");
+            cc.getClassPool().importPackage("de.ropemc.rv2.mc114");
             CtMethod renderGameOverlayMethod = cc.getDeclaredMethod("a", new CtClass[]{CtClass.floatType});
-            renderGameOverlayMethod.insertBefore("Rope.getEventBus().fire(new PreRender2DEvent($1));");
-            renderGameOverlayMethod.insertAfter("Rope.getEventBus().fire(new Render2DEvent($1));");
+            renderGameOverlayMethod.insertBefore("EventFactory.onPreRender2D(this,$1);");
+            renderGameOverlayMethod.insertAfter("EventFactory.onRender2D(this,$1);");
         } catch (Exception e) {
             e.printStackTrace();
         }
