@@ -11,9 +11,7 @@ import de.ropemc.rv2.api.RopeMC;
 import de.ropemc.rv2.api.minecraft.client.entity.player.ClientPlayerEntity;
 import de.ropemc.rv2.api.minecraft.client.gui.FontRenderer;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
-import de.ropemc.rv2.loader.event.DefaultEventBus;
 import de.ropemc.rv2.mc114.MinecraftWrapperFactoryImpl;
-import de.ropemc.rv2.mc114.transformer.ClientPlayerEntityTransformer;
 import de.ropemc.rv2.mc114.transformer.HookTransformer;
 import de.ropemc.rv2.mc114.transformer.GameLoopTransformer;
 import de.ropemc.rv2.mc114.transformer.IngameGuiTransformer;
@@ -36,7 +34,7 @@ public class RopeMCImpl implements RopeMC {
     private MinecraftWrapperFactory minecraftWrapperFactory;
 
     public RopeMCImpl(){
-        this.eventBus = new DefaultEventBus();
+        this.eventBus = new EventBus();
         this.minecraftWrapperFactory = new MinecraftWrapperFactoryImpl();
     }
 

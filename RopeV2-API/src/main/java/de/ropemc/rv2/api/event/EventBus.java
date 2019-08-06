@@ -1,15 +1,25 @@
 package de.ropemc.rv2.api.event;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
 
-public interface EventBus {
-    HashMap<Class<Event>, List<Consumer<Event>>> getListeners();
+public class EventBus {
+    private HashMap<Class<Event>, List<Consumer<Event>>> listeners = new HashMap<>();
 
-    <T extends Event> void listen(Class<T> type, Consumer<T> listener);
+    public HashMap<Class<Event>, List<Consumer<Event>>> getListeners() {
+        return listeners;
+    }
 
-    void listen(Class<?> clazz);
+    public <T extends Event> void listen(Class<T> type, Consumer<T> listener) {
+        if (!listeners.containsKey(type)) listeners.put((Class<Event>) type, new ArrayList<>());
+        listeners.get(type).add((Consumer<Event>) listener);
+    }
 
-    void fire(Event event);
+    public void listen(Object instance) {}
+
+    public void fire(Event event) {
+        listeners.getOrDefault(event.getClass(), new ArrayList<>()).forEach(eventConsumer -> eventConsumer.accept(event));
+    }
 }
