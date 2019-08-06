@@ -4,13 +4,16 @@ import de.ropemc.rv2.api.ClassTransformer;
 import de.ropemc.rv2.api.MinecraftWrapperFactory;
 import de.ropemc.rv2.api.Rope;
 import de.ropemc.rv2.api.event.EventBus;
+import de.ropemc.rv2.api.event.game.ClientChatEvent;
 import de.ropemc.rv2.api.event.game.GameLoopEvent;
 import de.ropemc.rv2.api.event.render.Render2DEvent;
 import de.ropemc.rv2.api.minecraft.client.Minecraft;
 import de.ropemc.rv2.api.RopeMC;
 import de.ropemc.rv2.api.minecraft.client.entity.player.ClientPlayerEntity;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
+import de.ropemc.rv2.api.minecraft.util.text.StringTextComponent;
 import de.ropemc.rv2.mc114.MinecraftWrapperFactoryImpl;
+import de.ropemc.rv2.mc114.transformer.ClientPlayerEntityTransformer;
 import de.ropemc.rv2.mc114.transformer.HookTransformer;
 import de.ropemc.rv2.mc114.transformer.GameLoopTransformer;
 import de.ropemc.rv2.mc114.transformer.IngameGuiTransformer;
@@ -96,6 +99,13 @@ public class RopeMCImpl implements RopeMC {
         Rope.getEventBus().listen(Render2DEvent.class, e -> {
             jhClientGUI.renderScreen(e.getGui());
         });
+        Rope.getEventBus().listen(ClientChatEvent.class, e -> {
+            System.out.println("MSG: "+e.getMessage());
+            if(e.getMessage().startsWith(".")){
+                Rope.getMinecraft().getPlayer().sendMessage(new StringTextComponent(e.getMessage().substring(1)));
+                e.setCancelled(true);
+            }
+        });
         JFrame frame = new JFrame();
         JButton button = new JButton("Klick mich");
         button.addActionListener(e -> jhClientGUI.toggleVisible());
@@ -111,7 +121,7 @@ public class RopeMCImpl implements RopeMC {
         addTransformer(new HookTransformer());
         addTransformer(new GameLoopTransformer());
         addTransformer(new IngameGuiTransformer());
-        //addTransformer(new ClientPlayerEntityTransformer());
+        addTransformer(new ClientPlayerEntityTransformer());
         System.out.println("Hello World from RopeV2");
     }
 

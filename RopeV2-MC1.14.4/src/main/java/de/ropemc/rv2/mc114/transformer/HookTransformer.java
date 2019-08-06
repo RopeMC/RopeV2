@@ -6,7 +6,6 @@ import de.ropemc.rv2.api.Rope;
 import de.ropemc.rv2.mc114.minecraft.client.MinecraftImpl;
 import javassist.*;
 
-import javax.swing.*;
 import java.lang.reflect.Field;
 
 public class HookTransformer implements ClassTransformer {
