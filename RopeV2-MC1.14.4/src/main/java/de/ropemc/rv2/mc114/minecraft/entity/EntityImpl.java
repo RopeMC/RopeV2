@@ -12,6 +12,8 @@ public class EntityImpl implements Entity {
 
     private static int mGetMotion = accessor.getMethodAccess().getIndex("cj");
     private static int mSetMotion;
+    private static int mIsGlowing = accessor.getMethodAccess().getIndex("bm", new Class[0]);
+    private static int mSetGlowing = accessor.getMethodAccess().getIndex("h", boolean.class);
 
     static {
         try {
@@ -27,15 +29,19 @@ public class EntityImpl implements Entity {
         this.handle = handle;
     }
 
-    public boolean isOnGround() {
-        return false;
-    }
-
     public Vec3d getMotion() {
         return new Vec3d(accessor.getMethodAccess().invoke(handle, mGetMotion));
     }
 
     public void setMotion(Vec3d motion){
         accessor.getMethodAccess().invoke(this.handle, mSetMotion, motion.getWrapper().getHandle());
+    }
+
+    public boolean isGlowing() {
+        return (boolean) accessor.getMethodAccess().invoke(this.handle, mIsGlowing);
+    }
+
+    public void setGlowing(boolean glowingIn) {
+        accessor.getMethodAccess().invoke(this.handle, mSetGlowing, glowingIn);
     }
 }
