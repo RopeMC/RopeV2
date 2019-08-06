@@ -1,9 +1,10 @@
 package de.ropemc.rv2.api.minecraft.entity;
 
+import de.ropemc.rv2.api.minecraft.command.ICommandSource;
 import de.ropemc.rv2.api.minecraft.util.math.BlockPos;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 
-public interface Entity {
+public interface Entity extends ICommandSource {
 
     Vec3d getMotion();
 

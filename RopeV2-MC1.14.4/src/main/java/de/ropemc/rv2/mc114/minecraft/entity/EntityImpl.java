@@ -3,6 +3,7 @@ package de.ropemc.rv2.mc114.minecraft.entity;
 import de.ropemc.rv2.api.minecraft.entity.Entity;
 import de.ropemc.rv2.api.minecraft.util.math.BlockPos;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
+import de.ropemc.rv2.api.minecraft.util.text.ITextComponent;
 import de.ropemc.rv2.mc114.minecraft.util.math.Vec3dImpl;
 import de.ropemc.rv2.util.ReflectAccessor;
 
@@ -66,6 +67,5 @@ public class EntityImpl implements Entity {
         return (boolean) accessor.getMethodAccess().invoke(this.handle, mGetFlag, flag);
     }
 
-
-
+    public void sendMessage(ITextComponent text) { }
 }
