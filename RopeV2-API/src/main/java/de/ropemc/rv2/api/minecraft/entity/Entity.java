@@ -3,6 +3,7 @@ package de.ropemc.rv2.api.minecraft.entity;
 import de.ropemc.rv2.api.minecraft.command.ICommandSource;
 import de.ropemc.rv2.api.minecraft.util.math.BlockPos;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
+import de.ropemc.rv2.api.minecraft.util.text.ITextComponent;
 
 public interface Entity extends ICommandSource {
 
@@ -29,6 +30,8 @@ public interface Entity extends ICommandSource {
     }
 
     void setFlag(int flag, boolean state);
+
+    default void sendMessage(ITextComponent text) {}
 
     enum Flags {
         BURNING(0),
