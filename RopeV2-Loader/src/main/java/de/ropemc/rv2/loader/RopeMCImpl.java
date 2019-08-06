@@ -12,6 +12,7 @@ import de.ropemc.rv2.api.minecraft.entity.Entity;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.loader.event.DefaultEventBus;
 import de.ropemc.rv2.mc114.MinecraftWrapperFactoryImpl;
+import de.ropemc.rv2.mc114.transformer.ClientPlayerEntityTransformer;
 import de.ropemc.rv2.mc114.transformer.HookTransformer;
 import de.ropemc.rv2.mc114.transformer.GameLoopTransformer;
 import de.ropemc.rv2.mc114.transformer.IngameGuiTransformer;
@@ -95,6 +96,7 @@ public class RopeMCImpl implements RopeMC {
         addTransformer(new HookTransformer());
         addTransformer(new GameLoopTransformer());
         addTransformer(new IngameGuiTransformer());
+        addTransformer(new ClientPlayerEntityTransformer());
         System.out.println("Hello World from RopeV2");
     }
 
