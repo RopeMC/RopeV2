@@ -83,6 +83,7 @@ public class RopeMCImpl implements RopeMC {
             Minecraft minecraft = Rope.getMinecraft();
             if(minecraft == null)
                 return;
+            minecraft.getFontRenderer().drawString("JHClient", 4, 4, 0xffffffff);
             ClientPlayerEntity player = minecraft.getPlayer();
             if(player == null)
                 return;

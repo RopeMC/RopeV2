@@ -2,8 +2,10 @@ package de.ropemc.rv2.mc114.minecraft.client;
 
 import de.ropemc.rv2.api.minecraft.client.Minecraft;
 import de.ropemc.rv2.api.minecraft.client.entity.player.ClientPlayerEntity;
+import de.ropemc.rv2.api.minecraft.client.gui.FontRenderer;
 import de.ropemc.rv2.api.minecraft.client.world.ClientWorld;
 import de.ropemc.rv2.mc114.minecraft.client.entity.player.ClientPlayerEntityImpl;
+import de.ropemc.rv2.mc114.minecraft.client.gui.FontRendererImpl;
 import de.ropemc.rv2.mc114.minecraft.client.world.ClientWorldImpl;
 import de.ropemc.rv2.util.ReflectAccessor;
 
@@ -12,6 +14,7 @@ public class MinecraftImpl implements Minecraft {
 
     private static int fPlayer = accessor.getFieldAccess().getIndex("i");
     private static int fWorld = accessor.getFieldAccess().getIndex("g");
+    private static int fFontRenderer = accessor.getFieldAccess().getIndex("m");
 
     private Object handle;
 
@@ -29,4 +32,9 @@ public class MinecraftImpl implements Minecraft {
     public ClientWorld getWorld() {
         return new ClientWorldImpl(accessor.getFieldAccess().get(this.handle, fWorld));
     }
+
+    public FontRenderer getFontRenderer(){
+        return new FontRendererImpl(accessor.getFieldAccess().get(this.handle, fFontRenderer));
+    }
+
 }
