@@ -14,6 +14,7 @@ import de.ropemc.rv2.loader.event.DefaultEventBus;
 import de.ropemc.rv2.mc114.MinecraftWrapperFactoryImpl;
 import de.ropemc.rv2.mc114.transformer.HookTransformer;
 import de.ropemc.rv2.mc114.transformer.GameLoopTransformer;
+import de.ropemc.rv2.mc114.transformer.IngameGuiTransformer;
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -92,6 +93,7 @@ public class RopeMCImpl implements RopeMC {
         });
         addTransformer(new HookTransformer());
         addTransformer(new GameLoopTransformer());
+        addTransformer(new IngameGuiTransformer());
         System.out.println("Hello World from RopeV2");
     }
 
