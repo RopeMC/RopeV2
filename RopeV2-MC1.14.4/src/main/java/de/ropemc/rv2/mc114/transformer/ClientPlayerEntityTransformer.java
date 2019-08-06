@@ -14,7 +14,7 @@ public class ClientPlayerEntityTransformer implements ClassTransformer {
             cc.getClassPool().importPackage("de.ropemc.rv2.api");
             cc.getClassPool().importPackage("de.ropemc.rv2.api.event");
             cc.getClassPool().importPackage("de.ropemc.rv2.api.event.game");
-            CtMethod sendChatMessageMethod = cc.getDeclaredMethod("a");
+            CtMethod sendChatMessageMethod = cc.getDeclaredMethod("a", new CtClass[] {cc.getClassPool().get("java.lang.String")});
             sendChatMessageMethod.insertBefore("ClientChatEvent event = new ClientChatEvent($1); Rope.getEventBus().fire(event); if (event.isCancelled()) return;");
         } catch (Exception e) {
             e.printStackTrace();
