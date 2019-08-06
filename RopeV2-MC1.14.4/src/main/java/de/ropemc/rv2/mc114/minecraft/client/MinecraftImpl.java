@@ -34,7 +34,10 @@ public class MinecraftImpl implements Minecraft {
     }
 
     public FontRenderer getFontRenderer(){
-        return new FontRendererImpl(accessor.getFieldAccess().get(this.handle, fFontRenderer));
+        Object handle = accessor.getFieldAccess().get(this.handle, fFontRenderer);
+        if(handle == null)
+            return null;
+        return new FontRendererImpl(handle);
     }
 
 }

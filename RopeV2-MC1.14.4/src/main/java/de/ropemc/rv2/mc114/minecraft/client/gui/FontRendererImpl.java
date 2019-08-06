@@ -7,8 +7,8 @@ public class FontRendererImpl implements FontRenderer {
 
     private static ReflectAccessor accessor = ReflectAccessor.getByName("cyu");
 
-    private static int mDrawStringWithShadow = accessor.getMethodAccess().getIndex("?", String.class, float.class, float.class, int.class);
-    private static int mDrawString = accessor.getMethodAccess().getIndex("?", String.class, float.class, float.class, int.class);
+    private static int mDrawStringWithShadow = accessor.getMethodAccess().getIndex("a", String.class, float.class, float.class, int.class);
+    private static int mDrawString = accessor.getMethodAccess().getIndex("b", String.class, float.class, float.class, int.class);
 
     private Object handle;
 

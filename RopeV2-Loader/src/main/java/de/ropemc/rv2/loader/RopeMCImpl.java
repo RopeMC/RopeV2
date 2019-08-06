@@ -5,10 +5,12 @@ import de.ropemc.rv2.api.MinecraftWrapperFactory;
 import de.ropemc.rv2.api.Rope;
 import de.ropemc.rv2.api.event.EventBus;
 import de.ropemc.rv2.api.event.game.GameLoopEvent;
+import de.ropemc.rv2.api.event.render.AfterRender2DEvent;
+import de.ropemc.rv2.api.event.render.BeforeRender2DEvent;
 import de.ropemc.rv2.api.minecraft.client.Minecraft;
 import de.ropemc.rv2.api.RopeMC;
 import de.ropemc.rv2.api.minecraft.client.entity.player.ClientPlayerEntity;
-import de.ropemc.rv2.api.minecraft.entity.Entity;
+import de.ropemc.rv2.api.minecraft.client.gui.FontRenderer;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.loader.event.DefaultEventBus;
 import de.ropemc.rv2.mc114.MinecraftWrapperFactoryImpl;
@@ -83,7 +85,6 @@ public class RopeMCImpl implements RopeMC {
             Minecraft minecraft = Rope.getMinecraft();
             if(minecraft == null)
                 return;
-            minecraft.getFontRenderer().drawString("JHClient", 4, 4, 0xffffffff);
             ClientPlayerEntity player = minecraft.getPlayer();
             if(player == null)
                 return;
@@ -91,6 +92,15 @@ public class RopeMCImpl implements RopeMC {
                 Vec3d motion = player.getMotion();
                 player.setMotion(new Vec3d(motion.getX() * 0.5, motion.getY(), motion.getZ() * 0.5));
             }
+        });
+        Rope.getEventBus().listen(AfterRender2DEvent.class, e -> {
+            Minecraft minecraft = Rope.getMinecraft();
+            if(minecraft == null)
+                return;
+            FontRenderer fontRenderer = minecraft.getFontRenderer();
+            if(fontRenderer == null)
+                return;
+            fontRenderer.drawString("JHClient", 4, 4, 0xffffffff);
         });
         addTransformer(new HookTransformer());
         addTransformer(new GameLoopTransformer());

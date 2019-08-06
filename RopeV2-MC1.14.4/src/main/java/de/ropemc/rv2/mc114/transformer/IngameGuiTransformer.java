@@ -14,8 +14,9 @@ public class IngameGuiTransformer implements ClassTransformer {
             cc.getClassPool().importPackage("de.ropemc.rv2.api");
             cc.getClassPool().importPackage("de.ropemc.rv2.api.event");
             cc.getClassPool().importPackage("de.ropemc.rv2.api.event.render");
-            CtMethod renderGameOverlayMethod = cc.getDeclaredMethod("a");
-            renderGameOverlayMethod.insertBefore("Rope.getEventBus().fire(new Render2DEvent($1));");
+            CtMethod renderGameOverlayMethod = cc.getDeclaredMethod("a", new CtClass[]{CtClass.floatType});
+            renderGameOverlayMethod.insertBefore("Rope.getEventBus().fire(new BeforeRender2DEvent($1));");
+            renderGameOverlayMethod.insertAfter("Rope.getEventBus().fire(new AfterRender2DEvent($1));");
         } catch (Exception e) {
             e.printStackTrace();
         }
