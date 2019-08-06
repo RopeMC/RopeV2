@@ -6,6 +6,7 @@ import de.ropemc.rv2.api.Rope;
 import de.ropemc.rv2.api.event.EventBus;
 import de.ropemc.rv2.api.event.game.ClientChatEvent;
 import de.ropemc.rv2.api.event.game.GameLoopEvent;
+import de.ropemc.rv2.api.event.input.KeyEvent;
 import de.ropemc.rv2.api.event.render.Render2DEvent;
 import de.ropemc.rv2.api.minecraft.client.Minecraft;
 import de.ropemc.rv2.api.RopeMC;
@@ -15,10 +16,7 @@ import de.ropemc.rv2.api.minecraft.util.text.StringTextComponent;
 import de.ropemc.rv2.api.mod.Mod;
 import de.ropemc.rv2.api.mod.ModLoader;
 import de.ropemc.rv2.mc114.MinecraftWrapperFactoryImpl;
-import de.ropemc.rv2.mc114.transformer.ClientPlayerEntityTransformer;
-import de.ropemc.rv2.mc114.transformer.HookTransformer;
-import de.ropemc.rv2.mc114.transformer.GameLoopTransformer;
-import de.ropemc.rv2.mc114.transformer.IngameGuiTransformer;
+import de.ropemc.rv2.mc114.transformer.*;
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -106,6 +104,7 @@ public class RopeMCImpl implements RopeMC {
         addTransformer(new GameLoopTransformer());
         addTransformer(new IngameGuiTransformer());
         addTransformer(new ClientPlayerEntityTransformer());
+        addTransformer(new KeyboardListenerTransformer());
         System.out.println("Hello World from RopeV2");
     }
 

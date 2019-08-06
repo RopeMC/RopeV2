@@ -10,10 +10,6 @@ import java.lang.reflect.Field;
 
 public class HookTransformer implements ClassTransformer {
 
-    public HookTransformer() {
-
-    }
-
     public String[] getTransformedClasses() {
         return new String[]{"cyc"};
     }
