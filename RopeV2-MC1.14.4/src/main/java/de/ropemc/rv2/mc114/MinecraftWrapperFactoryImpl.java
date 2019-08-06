@@ -17,11 +17,9 @@ public class MinecraftWrapperFactoryImpl implements MinecraftWrapperFactory {
     public Vec3i.Wrapper vec3i(int x, int y, int z) {
         return new Vec3iImpl(x, y, z);
     }
-
     public Vec3i.Wrapper vec3i(double x, double y, double z) {
         return new Vec3iImpl(x, y, z);
     }
-
     public Vec3i.Wrapper vec3i(Object handle) {
         return new Vec3iImpl(handle);
     }
