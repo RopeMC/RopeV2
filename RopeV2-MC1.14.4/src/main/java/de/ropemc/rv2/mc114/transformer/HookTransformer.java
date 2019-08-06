@@ -3,6 +3,7 @@ package de.ropemc.rv2.mc114.transformer;
 import de.ropemc.rv2.api.ClassTransformer;
 import de.ropemc.rv2.api.minecraft.client.Minecraft;
 import de.ropemc.rv2.api.Rope;
+import de.ropemc.rv2.api.minecraft.util.text.StringTextComponent;
 import de.ropemc.rv2.mc114.minecraft.client.MinecraftImpl;
 import javassist.*;
 
@@ -14,7 +15,7 @@ public class HookTransformer implements ClassTransformer {
     public HookTransformer() {
         JFrame frame = new JFrame();
         JButton button = new JButton("Klick mich");
-        button.addActionListener(e -> Rope.getMinecraft().getWorld().getPlayers().stream().filter(player -> !player.isGlowing()).forEach(player -> player.setGlowing(true)));
+        button.addActionListener(e -> Rope.getMinecraft().getPlayer().sendMessage(new StringTextComponent("Hey")));
         frame.add(button);
         frame.setVisible(true);
     }
