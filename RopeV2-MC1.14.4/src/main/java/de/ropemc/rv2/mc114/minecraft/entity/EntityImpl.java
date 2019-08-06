@@ -13,6 +13,8 @@ public class EntityImpl implements Entity {
 
     private static int mGetMotion = accessor.getMethodAccess().getIndex("cj");
     private static int mSetMotion;
+    private static int mSetFlag = accessor.getMethodAccess().getIndex("b", int.class, boolean.class);
+    private static int mGetFlag = accessor.getMethodAccess().getIndex("i", int.class);
     private static int mIsGlowing = accessor.getMethodAccess().getIndex("bm", new Class[0]);
     private static int mSetGlowing = accessor.getMethodAccess().getIndex("h", boolean.class);
     private static int mGetPosition = accessor.getMethodAccess().getIndex("bO", new Class[0]);
@@ -55,4 +57,15 @@ public class EntityImpl implements Entity {
     public Vec3d getPositionVector() {
         return new Vec3d(accessor.getMethodAccess().invoke(this.handle, mGetPositionVector));
     }
+
+    public void setFlag(int flag, boolean state){
+        accessor.getMethodAccess().invoke(this.handle, mSetFlag, flag, state);
+    }
+
+    public boolean getFlag(int flag){
+        return (boolean) accessor.getMethodAccess().invoke(this.handle, mGetFlag, flag);
+    }
+
+
+
 }

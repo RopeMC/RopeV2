@@ -16,10 +16,6 @@ public class LivingEntityImpl extends EntityImpl implements LivingEntity {
     }
 
     public int getHurtTime() {
-        if(this.handle == null){
-            System.out.println("Handle is null");
-            return 0;
-        }
         return (int) accessor.getFieldAccess().get(this.handle, fHurtTime);
     }
 
@@ -30,4 +26,5 @@ public class LivingEntityImpl extends EntityImpl implements LivingEntity {
     public void setHealth(float health) {
         accessor.getMethodAccess().invoke(this.handle, mSetHealth, health);
     }
+
 }

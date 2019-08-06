@@ -36,6 +36,8 @@ public class ConstructorAccess {
     }
 
     public Object newInstance(int index, Object... params){
+        if(index < 0)
+            return null;
         if(index >= constructors.size())
             return null;
         try {

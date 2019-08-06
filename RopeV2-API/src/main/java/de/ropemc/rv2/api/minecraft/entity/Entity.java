@@ -16,4 +16,31 @@ public interface Entity {
     BlockPos getPosition();
 
     Vec3d getPositionVector();
+
+    default boolean getFlag(Flags flag){
+        return getFlag(flag.value);
+    }
+
+    boolean getFlag(int flag);
+
+    default void setFlag(Flags flag, boolean state){
+        setFlag(flag.value, state);
+    }
+
+    void setFlag(int flag, boolean state);
+
+    enum Flags {
+        BURNING(0),
+        SNEAKING(1),
+        SPRINTING(3),
+        SWIMMING(4),
+        INVISIBLE(5),
+        GLOWING(6),
+        ELYTRA_FLYING(7);
+        Flags(int value){
+            this.value = value;
+        }
+        private int value;
+    }
+
 }

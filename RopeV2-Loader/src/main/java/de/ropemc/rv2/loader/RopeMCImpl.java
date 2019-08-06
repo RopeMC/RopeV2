@@ -8,6 +8,7 @@ import de.ropemc.rv2.api.event.game.GameLoopEvent;
 import de.ropemc.rv2.api.minecraft.client.Minecraft;
 import de.ropemc.rv2.api.RopeMC;
 import de.ropemc.rv2.api.minecraft.client.entity.player.ClientPlayerEntity;
+import de.ropemc.rv2.api.minecraft.entity.Entity;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.loader.event.DefaultEventBus;
 import de.ropemc.rv2.mc114.MinecraftWrapperFactoryImpl;
