@@ -1,6 +1,7 @@
 package de.ropemc.rv2.mc114.minecraft.entity;
 
 import de.ropemc.rv2.api.minecraft.entity.Entity;
+import de.ropemc.rv2.api.minecraft.util.math.BlockPos;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.mc114.minecraft.util.math.Vec3dImpl;
 import de.ropemc.rv2.util.ReflectAccessor;
@@ -14,6 +15,8 @@ public class EntityImpl implements Entity {
     private static int mSetMotion;
     private static int mIsGlowing = accessor.getMethodAccess().getIndex("bm", new Class[0]);
     private static int mSetGlowing = accessor.getMethodAccess().getIndex("h", boolean.class);
+    private static int mGetPosition = accessor.getMethodAccess().getIndex("bO", new Class[0]);
+    private static int mGetPositionVector = accessor.getMethodAccess().getIndex("bP", new Class[0]);
 
     static {
         try {
@@ -43,5 +46,13 @@ public class EntityImpl implements Entity {
 
     public void setGlowing(boolean glowingIn) {
         accessor.getMethodAccess().invoke(this.handle, mSetGlowing, glowingIn);
+    }
+
+    public BlockPos getPosition() {
+        return new BlockPos(accessor.getMethodAccess().invoke(this.handle, mGetPosition));
+    }
+
+    public Vec3d getPositionVector() {
+        return new Vec3d(accessor.getMethodAccess().invoke(this.handle, mGetPositionVector));
     }
 }
