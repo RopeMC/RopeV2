@@ -1,37 +1,37 @@
-package de.ropemc.rv2.loader.mod;
+package de.ropemc.rv2.loader;
+
+import de.ropemc.rv2.api.mod.Mod;
+import de.ropemc.rv2.api.mod.ModLoader;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URLClassLoader;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
-public class ModLoader {
-    private File modFolder;
-    private List<Mod> mods;
+public class SimpleModLoader implements ModLoader {
 
-    public ModLoader(File modFolder) {
-        this.modFolder = modFolder;
-        if (!modFolder.exists()) modFolder.mkdir();
-        mods = Arrays.stream(Objects.requireNonNull(modFolder.listFiles()))
+    private List<Mod> mods = new ArrayList<>();
+
+    public List<Mod> getMods(){
+        return mods;
+    }
+
+    public void loadMods(File dir){
+        mods.addAll(Arrays.stream(Objects.requireNonNull(dir.listFiles()))
                 .filter(File::isFile)
                 .filter(file -> file.getName().endsWith(".jar"))
                 .map(this::loadMod)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
-    private Mod loadMod(File file) {
+    public Mod loadMod(File file) {
         System.out.println("Loading mod " + file.getName());
-
         try {
             URLClassLoader classLoader = new URLClassLoader(new java.net.URL[] {file.toURI().toURL()});
             Class<Mod> mainClass = null;
-
             JarFile jf = new JarFile(file);
             Enumeration<JarEntry> en = jf.entries();
             while (en.hasMoreElements()) {
@@ -43,19 +43,15 @@ public class ModLoader {
                     }
                 }
             }
-
             if (mainClass != null) {
-                System.out.println("Successfully loaded mod " + file.getName() + "!");
-
                 Mod instance = mainClass.newInstance();
-                instance.onEnable();
+                instance.onLoad();
+                System.out.println("Successfully loaded mod " + instance.modInfo().toString() + "!");
                 return instance;
             }
-
         } catch (IOException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
-
         throw new RuntimeException("Error while loading mod " + file.getName());
     }
 }

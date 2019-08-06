@@ -1,8 +1,9 @@
-package de.ropemc.rv2.loader.mod;
+package de.ropemc.rv2.api.mod;
 
 import java.util.Objects;
 
 public class ModInfo {
+
     private String name;
     private String version;
     private String author;
@@ -38,4 +39,9 @@ public class ModInfo {
     public int hashCode() {
         return Objects.hash(name, version, author);
     }
+
+    public String toString(){
+        return name + " ("+version+" by "+author+")";
+    }
+
 }

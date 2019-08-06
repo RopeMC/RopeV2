@@ -12,6 +12,8 @@ import de.ropemc.rv2.api.RopeMC;
 import de.ropemc.rv2.api.minecraft.client.entity.player.ClientPlayerEntity;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.api.minecraft.util.text.StringTextComponent;
+import de.ropemc.rv2.api.mod.Mod;
+import de.ropemc.rv2.api.mod.ModLoader;
 import de.ropemc.rv2.mc114.MinecraftWrapperFactoryImpl;
 import de.ropemc.rv2.mc114.transformer.ClientPlayerEntityTransformer;
 import de.ropemc.rv2.mc114.transformer.HookTransformer;
@@ -23,6 +25,7 @@ import javassist.CtClass;
 import javassist.NotFoundException;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +38,8 @@ public class RopeMCImpl implements RopeMC {
     private EventBus eventBus;
     private Map<String,List<ClassTransformer>> transformerMap = new HashMap<>();
     private MinecraftWrapperFactory minecraftWrapperFactory;
-    private GuiTest jhClientGUI = new GuiTest();
+    private ModLoader modLoader = new SimpleModLoader();
+    private File ropeDir = new File("RopeV2");
 
     public RopeMCImpl(){
         this.eventBus = new EventBus();
@@ -48,6 +52,19 @@ public class RopeMCImpl implements RopeMC {
 
     public EventBus getEventBus(){
         return eventBus;
+    }
+
+    public File getRopeFolder(){
+        if(!ropeDir.exists())
+            ropeDir.mkdir();
+        return ropeDir;
+    }
+
+    public File getModsFolder(){
+        File modsFolder = new File(getRopeFolder(), "Mods");
+        if(!modsFolder.exists())
+            modsFolder.mkdir();
+        return modsFolder;
     }
 
     public void addTransformer(ClassTransformer transformer) {
@@ -83,46 +100,17 @@ public class RopeMCImpl implements RopeMC {
     }
 
     public void run(){
-        Rope.getEventBus().listen(GameLoopEvent.class, e -> {
-            Minecraft minecraft = Rope.getMinecraft();
-            if(minecraft == null)
-                return;
-            ClientPlayerEntity player = minecraft.getPlayer();
-            if(player == null)
-                return;
-            if(player.getHurtTime() > 0){
-                Vec3d motion = player.getMotion();
-                player.setMotion(new Vec3d(motion.getX() * 0.5, motion.getY(), motion.getZ() * 0.5));
-            }
-            jhClientGUI.update();
-        });
-        Rope.getEventBus().listen(Render2DEvent.class, e -> {
-            jhClientGUI.renderScreen(e.getGui());
-        });
-        Rope.getEventBus().listen(ClientChatEvent.class, e -> {
-            System.out.println("MSG: "+e.getMessage());
-            if(e.getMessage().startsWith(".")){
-                Rope.getMinecraft().getPlayer().sendMessage(new StringTextComponent(e.getMessage().substring(1)));
-                e.setCancelled(true);
-            }
-        });
-        JFrame frame = new JFrame();
-        JButton button = new JButton("Klick mich");
-        button.addActionListener(e -> jhClientGUI.toggleVisible());
-        frame.add(button);
-        frame.setVisible(true);
-        jhClientGUI.modules.add(new GuiTest.Module("KillAura"));
-        jhClientGUI.modules.add(new GuiTest.Module("BHop"));
-        jhClientGUI.modules.add(new GuiTest.Module("ESP"));
-        jhClientGUI.modules.add(new GuiTest.Module("Jesus"));
-        GuiTest.Module module = new GuiTest.Module("Nametags");
-        module.toggle();
-        jhClientGUI.modules.add(module);
+        modLoader.loadMods(getModsFolder());
+        modLoader.getMods().forEach(Mod::onEnable);
         addTransformer(new HookTransformer());
         addTransformer(new GameLoopTransformer());
         addTransformer(new IngameGuiTransformer());
         addTransformer(new ClientPlayerEntityTransformer());
         System.out.println("Hello World from RopeV2");
+    }
+
+    public ModLoader getModLoader(){
+        return modLoader;
     }
 
 }
