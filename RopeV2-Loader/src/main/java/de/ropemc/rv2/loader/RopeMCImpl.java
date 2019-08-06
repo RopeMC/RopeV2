@@ -9,7 +9,6 @@ import de.ropemc.rv2.api.event.render.Render2DEvent;
 import de.ropemc.rv2.api.minecraft.client.Minecraft;
 import de.ropemc.rv2.api.RopeMC;
 import de.ropemc.rv2.api.minecraft.client.entity.player.ClientPlayerEntity;
-import de.ropemc.rv2.api.minecraft.client.gui.FontRenderer;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.mc114.MinecraftWrapperFactoryImpl;
 import de.ropemc.rv2.mc114.transformer.HookTransformer;
@@ -20,6 +19,7 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +32,7 @@ public class RopeMCImpl implements RopeMC {
     private EventBus eventBus;
     private Map<String,List<ClassTransformer>> transformerMap = new HashMap<>();
     private MinecraftWrapperFactory minecraftWrapperFactory;
+    private GuiTest jhClientGUI = new GuiTest();
 
     public RopeMCImpl(){
         this.eventBus = new EventBus();
@@ -90,16 +91,23 @@ public class RopeMCImpl implements RopeMC {
                 Vec3d motion = player.getMotion();
                 player.setMotion(new Vec3d(motion.getX() * 0.5, motion.getY(), motion.getZ() * 0.5));
             }
+            jhClientGUI.update();
         });
         Rope.getEventBus().listen(Render2DEvent.class, e -> {
-            Minecraft minecraft = Rope.getMinecraft();
-            if(minecraft == null)
-                return;
-            FontRenderer fontRenderer = minecraft.getFontRenderer();
-            if(fontRenderer == null)
-                return;
-            fontRenderer.drawString("JHClient", 4, 4, 0xffffffff);
+            jhClientGUI.renderScreen(e.getGui());
         });
+        JFrame frame = new JFrame();
+        JButton button = new JButton("Klick mich");
+        button.addActionListener(e -> jhClientGUI.toggleVisible());
+        frame.add(button);
+        frame.setVisible(true);
+        jhClientGUI.modules.add(new GuiTest.Module("KillAura"));
+        jhClientGUI.modules.add(new GuiTest.Module("BHop"));
+        jhClientGUI.modules.add(new GuiTest.Module("ESP"));
+        jhClientGUI.modules.add(new GuiTest.Module("Jesus"));
+        GuiTest.Module module = new GuiTest.Module("Nametags");
+        module.toggle();
+        jhClientGUI.modules.add(module);
         addTransformer(new HookTransformer());
         addTransformer(new GameLoopTransformer());
         addTransformer(new IngameGuiTransformer());

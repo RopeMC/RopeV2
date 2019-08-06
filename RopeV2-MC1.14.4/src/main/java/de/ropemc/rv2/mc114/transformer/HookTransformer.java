@@ -12,11 +12,7 @@ import java.lang.reflect.Field;
 public class HookTransformer implements ClassTransformer {
 
     public HookTransformer() {
-        JFrame frame = new JFrame();
-        JButton button = new JButton("Klick mich");
-        button.addActionListener(e -> Rope.getMinecraft().getWorld().getPlayers().stream().filter(player -> !player.isGlowing()).forEach(player -> player.setGlowing(true)));
-        frame.add(button);
-        frame.setVisible(true);
+
     }
 
     public String[] getTransformedClasses() {

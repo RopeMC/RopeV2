@@ -8,7 +8,7 @@ import de.ropemc.rv2.api.minecraft.client.gui.IngameGui;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JHClientGUI {
+public class GuiTest {
 
     private boolean visible = false;
     private int sel = 0;
@@ -45,6 +45,20 @@ public class JHClientGUI {
         return pos;
     }
 
+    public void update(){
+        if(isVisible()){
+            if(pos<0){
+                pos+=10;
+                if(pos>0)pos=0;
+            }
+        }else{
+            if(pos>-100){
+                pos-=10;
+                if(pos<-100)pos=-100;
+            }
+        }
+    }
+
     public void renderScreen(IngameGui gui){
         Minecraft minecraft = Rope.getMinecraft();
         if(minecraft == null)
@@ -57,12 +71,10 @@ public class JHClientGUI {
                 return;
             }
         }
-        /*
-        this.drawRect(pos, 0, pos+100, 500, 0x66424242);
-        this.drawHorizontalLine(pos, pos+99, 14, 0x66000000);
-        this.drawHorizontalLine(pos, pos+99, 25+(9*modules.size()), 0x66000000);
-        this.drawRect(pos, 18+(9*sel), pos+100, 28+(9*sel), 0x99424242);
-        */
+        gui.fill(pos, 0, pos+100, 500, 0x66424242);
+        gui.hLine(pos, pos+99, 14, 0x66000000);
+        gui.hLine(pos, pos+99, 25+(9*modules.size()), 0x66000000);
+        gui.fill(pos, 18+(9*sel), pos+100, 28+(9*sel), 0x99424242);
         String client_name = "\247bJHClient";
         String client_version = "\2477Version 0.1c";
         fontRenderer.drawString(client_name, pos+4, 4, 0xffffffff);
