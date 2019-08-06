@@ -25,7 +25,7 @@ public class HookTransformer implements ClassTransformer {
 
     public void transform(CtClass cc) {
         try {
-            cc.getClassPool().importPackage("de.ropemc.rv2.mc114");
+            cc.getClassPool().importPackage("de.ropemc.rv2.mc114.transformer");
             CtMethod runMethod = cc.getDeclaredMethod("b");
             runMethod.insertBefore("{HookTransformer.setMinecraft(this);}");
         } catch (Exception e) {

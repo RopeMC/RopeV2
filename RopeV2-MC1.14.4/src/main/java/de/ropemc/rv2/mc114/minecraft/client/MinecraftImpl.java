@@ -20,7 +20,10 @@ public class MinecraftImpl implements Minecraft {
     }
 
     public ClientPlayerEntity getPlayer() {
-        return new ClientPlayerEntityImpl(accessor.getFieldAccess().get(this.handle, fPlayer));
+        Object handle = accessor.getFieldAccess().get(this.handle, fPlayer);
+        if(handle == null)
+            return null;
+        return new ClientPlayerEntityImpl(handle);
     }
 
     public ClientWorld getWorld() {
