@@ -1,9 +1,11 @@
 package de.ropemc.rv2.mc114;
 
 import de.ropemc.rv2.api.MinecraftWrapperFactory;
+import de.ropemc.rv2.api.minecraft.util.DamageSource;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3i;
 import de.ropemc.rv2.api.minecraft.util.text.StringTextComponent;
+import de.ropemc.rv2.mc114.minecraft.util.DamageSourceImpl;
 import de.ropemc.rv2.mc114.minecraft.util.math.Vec3dImpl;
 import de.ropemc.rv2.mc114.minecraft.util.math.Vec3iImpl;
 import de.ropemc.rv2.mc114.minecraft.util.text.StringTextComponentImpl;
@@ -31,5 +33,12 @@ public class MinecraftWrapperFactoryImpl implements MinecraftWrapperFactory {
     }
     public StringTextComponent.Wrapper stringTextComponent(Object handle) {
         return new StringTextComponentImpl(handle);
+    }
+
+    public DamageSource.Wrapper damageSource(String name) {
+        return new DamageSourceImpl(name);
+    }
+    public DamageSource.Wrapper damageSource(Object handle) {
+        return new DamageSourceImpl(handle);
     }
 }

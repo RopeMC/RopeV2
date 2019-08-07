@@ -1,5 +1,6 @@
 package de.ropemc.rv2.api;
 
+import de.ropemc.rv2.api.minecraft.util.DamageSource;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3i;
 import de.ropemc.rv2.api.minecraft.util.text.StringTextComponent;
@@ -15,4 +16,7 @@ public interface MinecraftWrapperFactory {
 
     StringTextComponent.Wrapper stringTextComponent(String text);
     StringTextComponent.Wrapper stringTextComponent(Object handle);
+
+    DamageSource.Wrapper damageSource(String name);
+    DamageSource.Wrapper damageSource(Object handle);
 }

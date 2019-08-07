@@ -31,6 +31,22 @@ public interface Entity extends ICommandSource {
 
     void setFlag(int flag, boolean state);
 
+    default boolean isSprinting() {
+        return getFlag(Flags.SPRINTING);
+    }
+
+    default void setSprinting(boolean in) {
+        setFlag(Flags.SPRINTING, in);
+    }
+
+    default boolean isSwimming() {
+        return getFlag(Flags.SWIMMING);
+    }
+
+    default void setSwimming(boolean in) {
+        setFlag(Flags.SWIMMING, in);
+    }
+
     default void sendMessage(ITextComponent text) {}
 
     enum Flags {
