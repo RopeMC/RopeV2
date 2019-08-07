@@ -17,7 +17,12 @@ public class DamageSource {
         return wrapper;
     }
 
+    public String getDamageType() {
+        return wrapper.getDamageType();
+    }
+
     public interface Wrapper {
+        String getDamageType();
         Object getHandle();
     }
 }
