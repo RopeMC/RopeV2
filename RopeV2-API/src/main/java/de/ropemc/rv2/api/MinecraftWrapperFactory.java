@@ -1,5 +1,6 @@
 package de.ropemc.rv2.api;
 
+import de.ropemc.rv2.api.minecraft.client.gui.screen.inventory.InventoryScreen;
 import de.ropemc.rv2.api.minecraft.util.DamageSource;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3i;
@@ -19,4 +20,6 @@ public interface MinecraftWrapperFactory {
 
     DamageSource.Wrapper damageSource(String name);
     DamageSource.Wrapper damageSource(Object handle);
+
+    InventoryScreen.StaticWrapper inventoryScreen();
 }

@@ -1,10 +1,12 @@
 package de.ropemc.rv2.mc114;
 
 import de.ropemc.rv2.api.MinecraftWrapperFactory;
+import de.ropemc.rv2.api.minecraft.client.gui.screen.inventory.InventoryScreen;
 import de.ropemc.rv2.api.minecraft.util.DamageSource;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3i;
 import de.ropemc.rv2.api.minecraft.util.text.StringTextComponent;
+import de.ropemc.rv2.mc114.minecraft.client.gui.screen.inventory.InventoryScreenImpl;
 import de.ropemc.rv2.mc114.minecraft.util.DamageSourceImpl;
 import de.ropemc.rv2.mc114.minecraft.util.math.Vec3dImpl;
 import de.ropemc.rv2.mc114.minecraft.util.math.Vec3iImpl;
@@ -40,5 +42,9 @@ public class MinecraftWrapperFactoryImpl implements MinecraftWrapperFactory {
     }
     public DamageSource.Wrapper damageSource(Object handle) {
         return new DamageSourceImpl(handle);
+    }
+
+    public InventoryScreen.StaticWrapper inventoryScreen() {
+        return new InventoryScreenImpl.StaticImpl();
     }
 }
