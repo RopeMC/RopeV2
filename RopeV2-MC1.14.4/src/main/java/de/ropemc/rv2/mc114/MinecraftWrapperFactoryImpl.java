@@ -1,6 +1,9 @@
 package de.ropemc.rv2.mc114;
 
 import de.ropemc.rv2.api.MinecraftWrapperFactory;
+import de.ropemc.rv2.api.minecraft.block.Block;
+import de.ropemc.rv2.api.minecraft.block.material.Material;
+import de.ropemc.rv2.api.minecraft.block.material.MaterialColor;
 import de.ropemc.rv2.api.minecraft.client.gui.screen.inventory.InventoryScreen;
 import de.ropemc.rv2.api.minecraft.item.Item;
 import de.ropemc.rv2.api.minecraft.util.DamageSource;
@@ -8,6 +11,7 @@ import de.ropemc.rv2.api.minecraft.util.ResourceLocation;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3i;
 import de.ropemc.rv2.api.minecraft.util.text.StringTextComponent;
+import de.ropemc.rv2.mc114.minecraft.block.BlockImpl;
 import de.ropemc.rv2.mc114.minecraft.client.gui.screen.inventory.InventoryScreenImpl;
 import de.ropemc.rv2.mc114.minecraft.item.ItemImpl;
 import de.ropemc.rv2.mc114.minecraft.util.DamageSourceImpl;
@@ -63,14 +67,26 @@ public class MinecraftWrapperFactoryImpl implements MinecraftWrapperFactory {
         return new ItemImpl.PropertiesImpl(handle);
     }
 
+    public Block.Wrapper block(Block.Properties properties) {
+        return new BlockImpl(properties);
+    }
+    public Block.Wrapper block(Object handle) {
+        return new BlockImpl(handle);
+    }
+
+    public Block.Properties.Wrapper blockProperties(Material material, MaterialColor materialColor) {
+        return new BlockImpl.PropertiesImpl(material, materialColor);
+    }
+    public Block.Properties.Wrapper blockProperties(Object handle) {
+        return new BlockImpl.PropertiesImpl(handle);
+    }
+
     public ResourceLocation.Wrapper resourceLocation(String id){
         return new ResourceLocationImpl(id);
     }
-
     public ResourceLocation.Wrapper resourceLocation(String group, String id){
         return new ResourceLocationImpl(group, id);
     }
-
     public ResourceLocation.Wrapper resourceLocation(Object handle){
         return new ResourceLocationImpl(handle);
     }

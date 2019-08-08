@@ -1,5 +1,8 @@
 package de.ropemc.rv2.api;
 
+import de.ropemc.rv2.api.minecraft.block.Block;
+import de.ropemc.rv2.api.minecraft.block.material.Material;
+import de.ropemc.rv2.api.minecraft.block.material.MaterialColor;
 import de.ropemc.rv2.api.minecraft.client.gui.screen.inventory.InventoryScreen;
 import de.ropemc.rv2.api.minecraft.item.Item;
 import de.ropemc.rv2.api.minecraft.util.DamageSource;
@@ -28,6 +31,12 @@ public interface MinecraftWrapperFactory {
 
     Item.Properties.Wrapper itemProperties();
     Item.Properties.Wrapper itemProperties(Object handle);
+
+    Block.Wrapper block(Block.Properties properties);
+    Block.Wrapper block(Object handle);
+
+    Block.Properties.Wrapper blockProperties(Material material, MaterialColor materialColor);
+    Block.Properties.Wrapper blockProperties(Object handle);
 
     ResourceLocation.Wrapper resourceLocation(String id);
     ResourceLocation.Wrapper resourceLocation(String group, String id);

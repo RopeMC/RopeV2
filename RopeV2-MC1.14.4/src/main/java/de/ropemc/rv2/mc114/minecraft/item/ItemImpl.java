@@ -8,6 +8,7 @@ import de.ropemc.rv2.util.ReflectAccessor;
 public class ItemImpl implements Item.Wrapper {
 
     private static ReflectAccessor accessor = ReflectAccessor.getByName("bce");
+    private static int cItem = accessor.getConstructorAccess().getIndex(ItemImpl.PropertiesImpl.getClazz());
 
     private Object handle;
 
@@ -16,7 +17,8 @@ public class ItemImpl implements Item.Wrapper {
     }
 
     public ItemImpl(Item.Properties properties){
-
+        Object propertiesHandle = ((ItemImpl.PropertiesImpl) properties.getWrapper()).getHandle();
+        handle = accessor.getConstructorAccess().newInstance(cItem, propertiesHandle);
     }
 
     public Object getHandle(){
@@ -30,6 +32,9 @@ public class ItemImpl implements Item.Wrapper {
         private static int mMaxDamage = accessor.getMethodAccess().getIndex("c", int.class);
         private static int mDefaultMaxDamage = accessor.getMethodAccess().getIndex("b", int.class);
         private static int mGroup = accessor.getMethodAccess().getIndex("a", ItemGroupImpl.getClazz());
+        public static Class<?> getClazz(){
+            return accessor.getClazz();
+        }
         private Object handle;
         public PropertiesImpl(Object handle){
             this.handle = handle;
