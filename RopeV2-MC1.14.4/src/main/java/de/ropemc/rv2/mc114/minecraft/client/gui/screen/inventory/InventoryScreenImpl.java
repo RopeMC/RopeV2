@@ -20,7 +20,7 @@ public class InventoryScreenImpl {
         }
 
         public void drawEntityOnScreen(int x, int y, int diagonal, float lookX, float lookY, LivingEntity entity) {
-
+            accessor.getMethodAccess().invoke(null, mDrawEntityOnScreen, x, y, diagonal, lookX, lookY, entity.getHandle());
         }
     }
 }
