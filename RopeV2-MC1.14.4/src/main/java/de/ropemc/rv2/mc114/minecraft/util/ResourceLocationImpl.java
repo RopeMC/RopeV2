@@ -5,10 +5,14 @@ import de.ropemc.rv2.util.ReflectAccessor;
 
 public class ResourceLocationImpl implements ResourceLocation.Wrapper {
 
-    private static ReflectAccessor accessor = ReflectAccessor.getByName("dyu");
+    private static ReflectAccessor accessor = ReflectAccessor.getByName("qv");
 
     private static int cResourceLocation1 = accessor.getConstructorAccess().getIndex(String.class);
     private static int cResourceLocation2 = accessor.getConstructorAccess().getIndex(String.class, String.class);
+
+    public static Class<?> getClazz(){
+        return accessor.getClazz();
+    }
 
     private Object handle;
 
