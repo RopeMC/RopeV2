@@ -2,17 +2,9 @@ package de.ropemc.rv2.loader;
 
 import de.ropemc.rv2.api.ClassTransformer;
 import de.ropemc.rv2.api.MinecraftWrapperFactory;
-import de.ropemc.rv2.api.Rope;
 import de.ropemc.rv2.api.event.EventBus;
-import de.ropemc.rv2.api.event.game.ClientChatEvent;
-import de.ropemc.rv2.api.event.game.GameLoopEvent;
-import de.ropemc.rv2.api.event.input.KeyEvent;
-import de.ropemc.rv2.api.event.render.Render2DEvent;
 import de.ropemc.rv2.api.minecraft.client.Minecraft;
 import de.ropemc.rv2.api.RopeMC;
-import de.ropemc.rv2.api.minecraft.client.entity.player.ClientPlayerEntity;
-import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
-import de.ropemc.rv2.api.minecraft.util.text.StringTextComponent;
 import de.ropemc.rv2.api.mod.Mod;
 import de.ropemc.rv2.api.mod.ModLoader;
 import de.ropemc.rv2.mc114.MinecraftWrapperFactoryImpl;
@@ -22,7 +14,6 @@ import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,13 +26,13 @@ public class RopeMCImpl implements RopeMC {
     private Minecraft minecraft = null;
     private EventBus eventBus;
     private Map<String,List<ClassTransformer>> transformerMap = new HashMap<>();
-    private MinecraftWrapperFactory minecraftWrapperFactory;
     private ModLoader modLoader = new SimpleModLoader();
     private File ropeDir = new File("RopeV2");
+    private Map<Class<?>, Object> implementations = new HashMap<>();
 
     public RopeMCImpl(){
         this.eventBus = new EventBus();
-        this.minecraftWrapperFactory = new MinecraftWrapperFactoryImpl();
+        implementations.put(MinecraftWrapperFactory.class, new MinecraftWrapperFactoryImpl());
     }
 
     public Minecraft getMinecraft() {
@@ -76,7 +67,7 @@ public class RopeMCImpl implements RopeMC {
     }
 
     public MinecraftWrapperFactory getMinecraftWrapperFactory(){
-        return minecraftWrapperFactory;
+        return getImplementation(MinecraftWrapperFactory.class);
     }
 
     public byte[] transform(String className){
@@ -110,6 +101,10 @@ public class RopeMCImpl implements RopeMC {
 
     public ModLoader getModLoader(){
         return modLoader;
+    }
+
+    public <T> T getImplementation(Class<T> interfaceClass){
+        return (T) implementations.get(interfaceClass);
     }
 
 }

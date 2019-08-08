@@ -11,5 +11,6 @@ public interface RopeMC {
     void addTransformer(ClassTransformer transformer);
     ModLoader getModLoader();
     MinecraftWrapperFactory getMinecraftWrapperFactory();
+    <T> T getImplementation(Class<T> interfaceClass);
 
 }
