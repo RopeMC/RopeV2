@@ -6,7 +6,7 @@ import de.ropemc.rv2.api.minecraft.util.ResourceLocation;
 
 public interface Registry {
 
-    static Item register(Registry registry, ResourceLocation resourceLocation, Item element){
+    static Item register(ResourceLocation resourceLocation, Item element){
         return Rope.getRopeMC().getImplementation(Static.class).register(resourceLocation, element);
     }
 
