@@ -68,4 +68,8 @@ public class EntityImpl implements Entity {
     }
 
     public void sendMessage(ITextComponent text) { }
+
+    public Object getHandle() {
+        return handle;
+    }
 }

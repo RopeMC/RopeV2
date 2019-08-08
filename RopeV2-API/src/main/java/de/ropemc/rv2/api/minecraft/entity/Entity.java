@@ -7,6 +7,8 @@ import de.ropemc.rv2.api.minecraft.util.text.ITextComponent;
 
 public interface Entity extends ICommandSource {
 
+    Object getHandle();
+
     Vec3d getMotion();
 
     void setMotion(Vec3d motion);
@@ -62,5 +64,4 @@ public interface Entity extends ICommandSource {
         }
         private int value;
     }
-
 }

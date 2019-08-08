@@ -6,4 +6,7 @@ public interface IngameGui extends AbstractGui {
 
     void displayTitle(String title, String subTitle, int timeFadeIn, int displayTime, int timeFadeOut);
 
+    int getScaledWidth();
+
+    int getScaledHeight();
 }

@@ -1,7 +1,5 @@
 package de.ropemc.rv2.util;
 
-import com.esotericsoftware.reflectasm.FieldAccess;
-
 public class ReflectAccessor {
 
     private Class<?> clazz;
@@ -10,13 +8,8 @@ public class ReflectAccessor {
     private ConstructorAccess constructorAccess;
 
     public ReflectAccessor(Class<?> clazz) {
-        this(clazz, true);
-    }
-
-    public ReflectAccessor(Class<?> clazz, boolean fields) {
         this.clazz = clazz;
-        if(fields)
-            this.fieldAccess = FieldAccess.get(this.clazz);
+        fieldAccess = new FieldAccess(this.clazz);
         methodAccess = new MethodAccess(this.clazz);
         constructorAccess = new ConstructorAccess(this.clazz);
     }

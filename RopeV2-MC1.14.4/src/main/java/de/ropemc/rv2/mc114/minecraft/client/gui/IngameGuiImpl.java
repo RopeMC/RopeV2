@@ -9,6 +9,8 @@ public class IngameGuiImpl extends AbstractGuiImpl implements IngameGui {
 
     private static int mSetOverlayMessage = accessor.getMethodAccess().getIndex("a", String.class, boolean.class);
     private static int mDisplayTitle = accessor.getMethodAccess().getIndex("a", String.class, String.class, int.class, int.class, int.class);
+    private static int fScaledWidth = accessor.getFieldAccess().getIndex("D");
+    private static int fScaledHeight = accessor.getFieldAccess().getIndex("E");
 
     public IngameGuiImpl(Object handle) {
         super(handle);
@@ -20,6 +22,14 @@ public class IngameGuiImpl extends AbstractGuiImpl implements IngameGui {
 
     public void displayTitle(String title, String subTitle, int timeFadeIn, int displayTime, int timeFadeOut){
         accessor.getMethodAccess().invoke(handle, mDisplayTitle, title, subTitle, timeFadeIn, displayTime, timeFadeOut);
+    }
+
+    public int getScaledWidth() {
+        return accessor.getFieldAccess().getInt(handle, fScaledWidth);
+    }
+
+    public int getScaledHeight() {
+        return accessor.getFieldAccess().getInt(handle, fScaledHeight);
     }
 
 }
