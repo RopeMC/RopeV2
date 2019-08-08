@@ -1,8 +1,6 @@
 package de.ropemc.rv2.api;
 
-import de.ropemc.rv2.api.minecraft.item.Item;
 import de.ropemc.rv2.api.minecraft.util.DamageSource;
-import de.ropemc.rv2.api.minecraft.util.ResourceLocation;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3i;
 import de.ropemc.rv2.api.minecraft.util.text.StringTextComponent;
@@ -21,15 +19,4 @@ public interface MinecraftWrapperFactory {
 
     DamageSource.Wrapper damageSource(String name);
     DamageSource.Wrapper damageSource(Object handle);
-
-    Item.Wrapper item(Item.Properties properties);
-    Item.Wrapper item(Object handle);
-
-    Item.Properties.Wrapper itemProperties();
-    Item.Properties.Wrapper itemProperties(Object handle);
-
-    ResourceLocation.Wrapper resourceLocation(String id);
-    ResourceLocation.Wrapper resourceLocation(String group, String id);
-    ResourceLocation.Wrapper resourceLocation(Object handle);
-
 }
