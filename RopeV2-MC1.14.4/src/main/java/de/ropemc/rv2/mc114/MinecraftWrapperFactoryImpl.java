@@ -49,10 +49,6 @@ public class MinecraftWrapperFactoryImpl implements MinecraftWrapperFactory {
         return new DamageSourceImpl(handle);
     }
 
-    public InventoryScreen.StaticWrapper inventoryScreen() {
-        return new InventoryScreenImpl.StaticImpl();
-    }
-
     public Item.Wrapper item(Item.Properties properties) {
         return new ItemImpl(properties);
     }

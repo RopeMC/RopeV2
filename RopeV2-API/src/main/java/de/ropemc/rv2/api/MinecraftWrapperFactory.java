@@ -23,8 +23,6 @@ public interface MinecraftWrapperFactory {
     DamageSource.Wrapper damageSource(String name);
     DamageSource.Wrapper damageSource(Object handle);
 
-    InventoryScreen.StaticWrapper inventoryScreen();
-
     Item.Wrapper item(Item.Properties properties);
     Item.Wrapper item(Object handle);
 

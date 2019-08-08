@@ -5,9 +5,11 @@ import de.ropemc.rv2.api.MinecraftWrapperFactory;
 import de.ropemc.rv2.api.event.EventBus;
 import de.ropemc.rv2.api.minecraft.client.Minecraft;
 import de.ropemc.rv2.api.RopeMC;
+import de.ropemc.rv2.api.minecraft.client.gui.screen.inventory.InventoryScreen;
 import de.ropemc.rv2.api.mod.Mod;
 import de.ropemc.rv2.api.mod.ModLoader;
 import de.ropemc.rv2.mc114.MinecraftWrapperFactoryImpl;
+import de.ropemc.rv2.mc114.minecraft.client.gui.screen.inventory.InventoryScreenImpl;
 import de.ropemc.rv2.mc114.transformer.*;
 import javassist.CannotCompileException;
 import javassist.ClassPool;
@@ -33,6 +35,7 @@ public class RopeMCImpl implements RopeMC {
     public RopeMCImpl(){
         this.eventBus = new EventBus();
         implementations.put(MinecraftWrapperFactory.class, new MinecraftWrapperFactoryImpl());
+        implementations.put(InventoryScreen.Static.class, new InventoryScreenImpl.StaticImpl());
     }
 
     public Minecraft getMinecraft() {

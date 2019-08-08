@@ -1,13 +1,14 @@
 package de.ropemc.rv2.mc114.minecraft.client.gui.screen.inventory;
 
-import de.ropemc.rv2.api.minecraft.client.gui.screen.inventory.InventoryScreen.StaticWrapper;
+import de.ropemc.rv2.api.minecraft.client.gui.screen.inventory.InventoryScreen;
 import de.ropemc.rv2.api.minecraft.entity.LivingEntity;
 import de.ropemc.rv2.util.ReflectAccessor;
 
 public class InventoryScreenImpl {
     private static ReflectAccessor accessor = ReflectAccessor.getByName("deb");
 
-    public static class StaticImpl implements StaticWrapper {
+    public static class StaticImpl implements InventoryScreen.Static {
+
         private static int mDrawEntityOnScreen;
 
         static {
