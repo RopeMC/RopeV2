@@ -16,7 +16,6 @@ public class BlocksTransformer implements ClassTransformer {
         return new String[]{"bmw"};
     }
     public void transform(CtClass ctClass) {
-        ctClass.getClassPool().importPackage("de.ropemc.rv2.mc114.transformer");
         CtConstructor constructor = ctClass.getClassInitializer();
         if(constructor == null){
             try {

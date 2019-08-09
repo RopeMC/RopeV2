@@ -108,6 +108,7 @@ public class RopeMCImpl implements RopeMC {
         if(transformerMap.containsKey(className)){
             try {
                 ClassPool cp = ClassPool.getDefault();
+                cp.importPackage("de.ropemc.rv2.mc114.transformer");
                 CtClass ctClass = cp.get(className);
                 for(ClassTransformer transformer : transformerMap.get(className)){
                     transformer.transform(ctClass);
