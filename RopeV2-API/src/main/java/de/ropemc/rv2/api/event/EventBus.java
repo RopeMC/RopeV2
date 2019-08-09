@@ -1,5 +1,7 @@
 package de.ropemc.rv2.api.event;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +19,24 @@ public class EventBus {
         listeners.get(type).add((Consumer<Event>) listener);
     }
 
-    public void listen(Object instance) {}
+    public void listen(Object instance) {
+        for (Method m : instance.getClass().getDeclaredMethods()) {
+            if (m.getParameterCount() == 1) {
+                Class<?> paramType = m.getParameterTypes()[0];
+                if (paramType.getSuperclass().equals(Event.class)) {
+                    m.setAccessible(true);
+                    Class<Event> eventType = (Class<Event>) paramType;
+                    listen(eventType, e -> {
+                        try {
+                            m.invoke(instance, e);
+                        } catch (IllegalAccessException | InvocationTargetException ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+                }
+            }
+        }
+    }
 
     public void fire(Event event) {
         listeners.getOrDefault(event.getClass(), new ArrayList<>()).forEach(eventConsumer -> eventConsumer.accept(event));
