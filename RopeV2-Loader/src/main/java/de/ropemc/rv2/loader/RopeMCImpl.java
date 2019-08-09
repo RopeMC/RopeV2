@@ -45,7 +45,6 @@ public class RopeMCImpl implements RopeMC {
         addTransformer(new IngameGuiTransformer());
         addTransformer(new KeyboardListenerTransformer());
         addTransformer(new VanillaPackTransformer());
-        addTransformer(new ItemsTransformer());
         addTransformer(new BlocksTransformer());
         this.eventBus = new EventBus();
     }
@@ -122,12 +121,14 @@ public class RopeMCImpl implements RopeMC {
         return null;
     }
 
+    public void implement(Class<?> interfaceClass, Object implementation){
+        implementations.put(interfaceClass, implementation);
+    }
+
     public void run(){
         implementations.put(MinecraftWrapperFactory.class, new MinecraftWrapperFactoryImpl());
         implementations.put(InventoryScreen.Static.class, new InventoryScreenImpl.StaticImpl());
         implementations.put(Registry.Static.class, new RegistryImpl.StaticImpl());
-        implementations.put(BlockManager.class, new BlockManagerImpl());
-        implementations.put(ItemManager.class, new ItemManagerImpl());
         modLoader.loadMods(getModsFolder());
         modLoader.getMods().forEach(Mod::onEnable);
         System.out.println("Hello World from RopeV2");

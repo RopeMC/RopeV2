@@ -10,7 +10,7 @@ public class ItemImpl implements Item.Wrapper {
     private static ReflectAccessor accessor = ReflectAccessor.getByName("bce");
     private static int cItem = accessor.getConstructorAccess().getIndex(ItemImpl.PropertiesImpl.getClazz());
 
-    private Object handle;
+    protected Object handle;
 
     public ItemImpl(Object handle){
         this.handle = handle;

@@ -9,10 +9,14 @@ public class Item {
         return Rope.getRopeMC().getImplementation(MinecraftWrapperFactory.class);
     }
 
-    private Wrapper wrapper;
+    protected Wrapper wrapper;
 
     public Item(Properties properties){
         wrapper = getMinecraftWrapperFactory().item(properties);
+    }
+
+    protected Item(Wrapper wrapper){
+        this.wrapper = wrapper;
     }
 
     public Item(Object handle){

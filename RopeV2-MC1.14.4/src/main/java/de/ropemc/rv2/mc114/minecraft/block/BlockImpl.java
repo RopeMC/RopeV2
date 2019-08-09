@@ -12,6 +12,10 @@ public class BlockImpl implements Block.Wrapper {
     private static ReflectAccessor accessor = ReflectAccessor.getByName("bmv");
     private static int cBlock = accessor.getConstructorAccess().getIndex(PropertiesImpl.getClazz());
 
+    public static Class<?> getClazz(){
+        return accessor.getClazz();
+    }
+
     private Object handle;
 
     public BlockImpl(Object handle){

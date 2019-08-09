@@ -5,6 +5,7 @@ import de.ropemc.rv2.api.minecraft.block.Block;
 import de.ropemc.rv2.api.minecraft.block.material.Material;
 import de.ropemc.rv2.api.minecraft.block.material.MaterialColor;
 import de.ropemc.rv2.api.minecraft.client.gui.screen.inventory.InventoryScreen;
+import de.ropemc.rv2.api.minecraft.item.BlockItem;
 import de.ropemc.rv2.api.minecraft.item.Item;
 import de.ropemc.rv2.api.minecraft.util.DamageSource;
 import de.ropemc.rv2.api.minecraft.util.ResourceLocation;
@@ -12,6 +13,7 @@ import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3i;
 import de.ropemc.rv2.api.minecraft.util.text.StringTextComponent;
 import de.ropemc.rv2.mc114.minecraft.block.BlockImpl;
+import de.ropemc.rv2.mc114.minecraft.item.BlockItemImpl;
 import de.ropemc.rv2.mc114.minecraft.item.ItemImpl;
 import de.ropemc.rv2.mc114.minecraft.util.DamageSourceImpl;
 import de.ropemc.rv2.mc114.minecraft.util.ResourceLocationImpl;
@@ -57,6 +59,13 @@ public class MinecraftWrapperFactoryImpl implements MinecraftWrapperFactory {
     }
     public Item.Wrapper item(Object handle) {
         return new ItemImpl(handle);
+    }
+
+    public BlockItem.Wrapper blockItem(Block block, Item.Properties properties) {
+        return new BlockItemImpl(block, properties);
+    }
+    public BlockItem.Wrapper blockItem(Object handle) {
+        return new BlockItemImpl(handle);
     }
 
     public Item.Properties.Wrapper itemProperties() {

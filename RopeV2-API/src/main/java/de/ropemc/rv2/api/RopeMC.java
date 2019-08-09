@@ -11,6 +11,7 @@ public interface RopeMC {
     Minecraft getMinecraft();
     EventBus getEventBus();
     void addTransformer(ClassTransformer transformer);
+    void implement(Class<?> interfaceClass, Object implementation);
     ModLoader getModLoader();
     <T> T getImplementation(Class<T> interfaceClass);
     BlockManager getBlockManager();
