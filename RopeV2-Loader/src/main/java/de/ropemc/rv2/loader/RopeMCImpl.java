@@ -3,6 +3,8 @@ package de.ropemc.rv2.loader;
 import de.ropemc.rv2.api.ClassTransformer;
 import de.ropemc.rv2.api.MinecraftWrapperFactory;
 import de.ropemc.rv2.api.event.EventBus;
+import de.ropemc.rv2.api.manager.BlockManager;
+import de.ropemc.rv2.api.manager.ItemManager;
 import de.ropemc.rv2.api.minecraft.client.Minecraft;
 import de.ropemc.rv2.api.RopeMC;
 import de.ropemc.rv2.api.minecraft.client.gui.screen.inventory.InventoryScreen;
@@ -10,6 +12,8 @@ import de.ropemc.rv2.api.minecraft.util.registry.Registry;
 import de.ropemc.rv2.api.mod.Mod;
 import de.ropemc.rv2.api.mod.ModLoader;
 import de.ropemc.rv2.mc114.MinecraftWrapperFactoryImpl;
+import de.ropemc.rv2.mc114.manager.BlockManagerImpl;
+import de.ropemc.rv2.mc114.manager.ItemManagerImpl;
 import de.ropemc.rv2.mc114.minecraft.client.gui.screen.inventory.InventoryScreenImpl;
 import de.ropemc.rv2.mc114.minecraft.util.registry.RegistryImpl;
 import de.ropemc.rv2.mc114.transformer.*;
@@ -35,10 +39,26 @@ public class RopeMCImpl implements RopeMC {
     private Map<Class<?>, Object> implementations = new HashMap<>();
 
     public RopeMCImpl(){
+        addTransformer(new ClientPlayerEntityTransformer());
+        addTransformer(new HookTransformer());
+        addTransformer(new GameLoopTransformer());
+        addTransformer(new IngameGuiTransformer());
+        addTransformer(new KeyboardListenerTransformer());
+        addTransformer(new VanillaPackTransformer());
+        addTransformer(new ItemsTransformer());
+        addTransformer(new BlocksTransformer());
         this.eventBus = new EventBus();
-        implementations.put(MinecraftWrapperFactory.class, new MinecraftWrapperFactoryImpl());
-        implementations.put(InventoryScreen.Static.class, new InventoryScreenImpl.StaticImpl());
-        implementations.put(Registry.Static.class, new RegistryImpl.StaticImpl());
+    }
+
+    public static boolean isLoaded(String className){
+        try {
+            java.lang.reflect.Method m = ClassLoader.class.getDeclaredMethod("findLoadedClass", new Class[] { String.class });
+            m.setAccessible(true);
+            return m.invoke(ClassLoader.getSystemClassLoader(),className) != null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public Minecraft getMinecraft() {
@@ -76,6 +96,14 @@ public class RopeMCImpl implements RopeMC {
         return getImplementation(MinecraftWrapperFactory.class);
     }
 
+    public BlockManager getBlockManager(){
+        return getImplementation(BlockManager.class);
+    }
+
+    public ItemManager getItemManager(){
+        return getImplementation(ItemManager.class);
+    }
+
     public byte[] transform(String className){
         if(transformerMap.containsKey(className)){
             try {
@@ -95,13 +123,13 @@ public class RopeMCImpl implements RopeMC {
     }
 
     public void run(){
+        implementations.put(MinecraftWrapperFactory.class, new MinecraftWrapperFactoryImpl());
+        implementations.put(InventoryScreen.Static.class, new InventoryScreenImpl.StaticImpl());
+        implementations.put(Registry.Static.class, new RegistryImpl.StaticImpl());
+        implementations.put(BlockManager.class, new BlockManagerImpl());
+        implementations.put(ItemManager.class, new ItemManagerImpl());
         modLoader.loadMods(getModsFolder());
         modLoader.getMods().forEach(Mod::onEnable);
-        addTransformer(new HookTransformer());
-        addTransformer(new GameLoopTransformer());
-        addTransformer(new IngameGuiTransformer());
-        addTransformer(new ClientPlayerEntityTransformer());
-        addTransformer(new KeyboardListenerTransformer());
         System.out.println("Hello World from RopeV2");
     }
 

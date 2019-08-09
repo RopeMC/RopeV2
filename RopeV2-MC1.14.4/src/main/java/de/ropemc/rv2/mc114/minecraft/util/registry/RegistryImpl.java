@@ -24,7 +24,7 @@ public class RegistryImpl implements Registry {
             return new Block(register(fBlock, resourceLocation, ((BlockImpl)block.getWrapper()).getHandle()));
         }
         private Object register(int registry, ResourceLocation resourceLocation, Object element){
-            Object registryHandle = accessor.getFieldAccess().get(null, fItem);
+            Object registryHandle = accessor.getFieldAccess().get(null, registry);
             Object resourceLocationHandle = ((ResourceLocationImpl) resourceLocation.getWrapper()).getHandle();
             return accessor.getMethodAccess().invoke(null, mRegister, registryHandle, resourceLocationHandle, element);
         }

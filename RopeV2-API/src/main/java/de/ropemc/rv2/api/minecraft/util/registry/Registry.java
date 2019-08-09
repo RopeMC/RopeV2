@@ -12,6 +12,7 @@ public interface Registry {
     }
 
     static Block register(ResourceLocation resourceLocation, Block block){
+        System.out.println("Registering Block: "+resourceLocation.getNamespace()+":"+resourceLocation.getPath());
         return Rope.getRopeMC().getImplementation(Static.class).register(resourceLocation, block);
     }
 

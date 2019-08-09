@@ -12,7 +12,6 @@ import de.ropemc.rv2.api.minecraft.util.math.Vec3d;
 import de.ropemc.rv2.api.minecraft.util.math.Vec3i;
 import de.ropemc.rv2.api.minecraft.util.text.StringTextComponent;
 import de.ropemc.rv2.mc114.minecraft.block.BlockImpl;
-import de.ropemc.rv2.mc114.minecraft.client.gui.screen.inventory.InventoryScreenImpl;
 import de.ropemc.rv2.mc114.minecraft.item.ItemImpl;
 import de.ropemc.rv2.mc114.minecraft.util.DamageSourceImpl;
 import de.ropemc.rv2.mc114.minecraft.util.ResourceLocationImpl;

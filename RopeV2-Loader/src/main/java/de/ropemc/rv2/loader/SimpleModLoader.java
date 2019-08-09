@@ -54,4 +54,14 @@ public class SimpleModLoader implements ModLoader {
         }
         throw new RuntimeException("Error while loading mod " + file.getName());
     }
+
+    public Mod getMod(String id){
+        for(Mod mod : mods){
+            if(mod.modInfo().getId().equals(id)){
+                return mod;
+            }
+        }
+        return null;
+    }
+
 }

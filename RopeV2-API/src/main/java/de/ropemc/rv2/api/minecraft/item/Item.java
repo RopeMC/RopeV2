@@ -1,17 +1,22 @@
 package de.ropemc.rv2.api.minecraft.item;
 
+import de.ropemc.rv2.api.MinecraftWrapperFactory;
 import de.ropemc.rv2.api.Rope;
 
 public class Item {
 
+    private static MinecraftWrapperFactory getMinecraftWrapperFactory(){
+        return Rope.getRopeMC().getImplementation(MinecraftWrapperFactory.class);
+    }
+
     private Wrapper wrapper;
 
     public Item(Properties properties){
-        wrapper = Rope.getRopeMC().getMinecraftWrapperFactory().item(properties);
+        wrapper = getMinecraftWrapperFactory().item(properties);
     }
 
     public Item(Object handle){
-        wrapper = Rope.getRopeMC().getMinecraftWrapperFactory().item(handle);
+        wrapper = getMinecraftWrapperFactory().item(handle);
     }
 
     public Wrapper getWrapper(){
@@ -27,11 +32,11 @@ public class Item {
         private Wrapper wrapper;
 
         public Properties(){
-            wrapper = Rope.getRopeMC().getMinecraftWrapperFactory().itemProperties();
+            wrapper = getMinecraftWrapperFactory().itemProperties();
         }
 
         public Properties(Object handle){
-            wrapper = Rope.getRopeMC().getMinecraftWrapperFactory().itemProperties(handle);
+            wrapper = getMinecraftWrapperFactory().itemProperties(handle);
         }
 
         public Properties maxStackSize(int maxStackSizeIn){

@@ -8,5 +8,6 @@ public interface ModLoader {
     Mod loadMod(File file);
     void loadMods(File dir);
     List<Mod> getMods();
+    Mod getMod(String id);
 
 }
