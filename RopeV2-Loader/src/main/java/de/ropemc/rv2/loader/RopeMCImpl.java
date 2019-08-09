@@ -46,6 +46,7 @@ public class RopeMCImpl implements RopeMC {
         addTransformer(new KeyboardListenerTransformer());
         addTransformer(new VanillaPackTransformer());
         addTransformer(new BlocksTransformer());
+        addTransformer(new ProtocolTypeTransformer());
         this.eventBus = new EventBus();
     }
 

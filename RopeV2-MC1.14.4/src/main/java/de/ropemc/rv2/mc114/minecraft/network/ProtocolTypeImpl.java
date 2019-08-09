@@ -38,8 +38,9 @@ public enum ProtocolTypeImpl {
         return accessor().getFieldAccess().get(null, field);
     }
 
-    public ProtocolTypeImpl registerPacket(PacketDirectionImpl packetDirection, Class<?> packetClass){
-        accessor.getMethodAccess().invoke(getValue(), mRegisterPacket, packetDirection.getValue(), packetClass);
+    public ProtocolTypeImpl registerPacket(PacketDirectionImpl packetDirection, Class<? extends IModPacket> packetClass){
+        //Create a new Class that wraps the packetClass and implements IPacket
+        //accessor.getMethodAccess().invoke(getValue(), mRegisterPacket, packetDirection.getValue(), newClass);
         return this;
     }
 
@@ -61,7 +62,7 @@ public enum ProtocolTypeImpl {
 
     public class WrapperImpl implements ProtocolType.Wrapper {
         public void registerPacket(ProtocolType protocolType, PacketDirection packetDirection, Class<? extends IModPacket> packetClass) {
-            //ProtocolTypeImpl.get(protocolType).registerPacket(PacketDirectionImpl.get(packetDirection), packetClass);
+            ProtocolTypeImpl.get(protocolType).registerPacket(PacketDirectionImpl.get(packetDirection), packetClass);
         }
     }
 
