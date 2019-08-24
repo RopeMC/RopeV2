@@ -9,9 +9,9 @@ public class Vec3iImpl implements Vec3i.Wrapper {
 
     private static int cVec3ii = accessor.getConstructorAccess().getIndex(int.class, int.class, int.class);
     private static int cVec3id = accessor.getConstructorAccess().getIndex(double.class, double.class, double.class);
-    private static int mGetX = accessor.getMethodAccess().getIndex("a", new Class[0]);
-    private static int mGetY = accessor.getMethodAccess().getIndex("b", new Class[0]);
-    private static int mGetZ = accessor.getMethodAccess().getIndex("c", new Class[0]);
+    private static int mGetX = accessor.getMethodAccess().getIndex("o", new Class[0]);
+    private static int mGetY = accessor.getMethodAccess().getIndex("p", new Class[0]);
+    private static int mGetZ = accessor.getMethodAccess().getIndex("q", new Class[0]);
 
     protected Object handle;
 
