@@ -35,9 +35,7 @@ public class FieldAccess {
     }
 
     public void set(Object instance, int index, Object value) {
-        if(index < 0)
-            return;
-        if(index >= fields.size())
+        if(index < 0 || index >= fields.size())
             return;
         try {
             fields.get(index).set(instance, value);

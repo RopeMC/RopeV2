@@ -23,7 +23,6 @@ public class VanillaPackTransformer implements ClassTransformer {
 
     public void transform(CtClass ctClass) {
         try {
-            ctClass.getClassPool().importPackage("de.ropemc.rv2.mc114.transformer");
             ctClass.getClassPool().importPackage("java.io");
             ctClass.getClassPool().importPackage("java.util");
             ctClass.getClassPool().importPackage("java.util.function");

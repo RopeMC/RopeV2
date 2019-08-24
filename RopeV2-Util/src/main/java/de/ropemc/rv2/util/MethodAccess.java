@@ -36,9 +36,7 @@ public class MethodAccess {
     }
 
     public Object invoke(Object instance, int index, Object... params){
-        if(index < 0)
-            return null;
-        if(index >= methods.size())
+        if(index < 0 || index >= methods.size())
             return null;
         try {
             return methods.get(index).invoke(instance, params);

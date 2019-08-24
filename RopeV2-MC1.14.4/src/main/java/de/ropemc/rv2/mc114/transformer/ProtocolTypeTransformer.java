@@ -3,6 +3,7 @@ package de.ropemc.rv2.mc114.transformer;
 import de.ropemc.rv2.api.ClassTransformer;
 import de.ropemc.rv2.api.Rope;
 import de.ropemc.rv2.api.event.game.PacketRegistryEvent;
+import de.ropemc.rv2.util.TransformUtil;
 import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.CtConstructor;
@@ -12,19 +13,7 @@ public class ProtocolTypeTransformer implements ClassTransformer {
         return new String[]{"jd"};
     }
     public void transform(CtClass ctClass) {
-        ctClass.getClassPool().importPackage("de.ropemc.rv2.mc114.transformer");
-        CtConstructor constructor = ctClass.getClassInitializer();
-        if(constructor == null){
-            try {
-                constructor = ctClass.makeClassInitializer();
-            } catch (CannotCompileException e) {
-                e.printStackTrace();
-            }
-        }
-        if(constructor == null){
-            System.out.println("Error transforming ProtocolType!");
-            return;
-        }
+        CtConstructor constructor = TransformUtil.getClassInitializer(ctClass);
         try {
             constructor.insertAfter("ProtocolTypeTransformer.registerPackets();");
         } catch (CannotCompileException e) {

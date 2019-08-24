@@ -7,6 +7,7 @@ import de.ropemc.rv2.api.manager.BlockManager;
 import de.ropemc.rv2.api.manager.ItemManager;
 import de.ropemc.rv2.mc114.manager.BlockManagerImpl;
 import de.ropemc.rv2.mc114.manager.ItemManagerImpl;
+import de.ropemc.rv2.util.TransformUtil;
 import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.CtConstructor;
@@ -16,19 +17,7 @@ public class BlocksTransformer implements ClassTransformer {
         return new String[]{"bmw"};
     }
     public void transform(CtClass ctClass) {
-        ctClass.getClassPool().importPackage("de.ropemc.rv2.mc114.transformer");
-        CtConstructor constructor = ctClass.getClassInitializer();
-        if(constructor == null){
-            try {
-                constructor = ctClass.makeClassInitializer();
-            } catch (CannotCompileException e) {
-                e.printStackTrace();
-            }
-        }
-        if(constructor == null){
-            System.out.println("Error transforming Blocks!");
-            return;
-        }
+        CtConstructor constructor = TransformUtil.getClassInitializer(ctClass);
         try {
             constructor.insertAfter("BlocksTransformer.registerBlocks();");
         } catch (CannotCompileException e) {

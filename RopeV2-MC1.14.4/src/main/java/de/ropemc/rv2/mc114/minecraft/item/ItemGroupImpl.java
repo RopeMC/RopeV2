@@ -3,63 +3,33 @@ package de.ropemc.rv2.mc114.minecraft.item;
 import de.ropemc.rv2.api.minecraft.item.ItemGroup;
 import de.ropemc.rv2.util.ReflectAccessor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ItemGroupImpl {
 
     private static ReflectAccessor accessor = ReflectAccessor.getByName("bba");
 
-    private static int fBuildingBlocks = accessor.getFieldAccess().getIndex("b");
-    private static int fDecorations = accessor.getFieldAccess().getIndex("c");
-    private static int fRedstone = accessor.getFieldAccess().getIndex("d");
-    private static int fTransportation = accessor.getFieldAccess().getIndex("e");
-    private static int fMisc = accessor.getFieldAccess().getIndex("f");
-    private static int fSearch = accessor.getFieldAccess().getIndex("g");
-    private static int fFood = accessor.getFieldAccess().getIndex("h");
-    private static int fTools = accessor.getFieldAccess().getIndex("i");
-    private static int fCombat = accessor.getFieldAccess().getIndex("j");
-    private static int fBrewing = accessor.getFieldAccess().getIndex("k");
-    private static int fHotbar = accessor.getFieldAccess().getIndex("m");
+    private static Map<ItemGroup, Integer> relationMap = new HashMap<ItemGroup, Integer>() {{
+        put(ItemGroup.BUILDING_BLOCKS, accessor.getFieldAccess().getIndex("b"));
+        put(ItemGroup.DECORATIONS, accessor.getFieldAccess().getIndex("c"));
+        put(ItemGroup.REDSTONE, accessor.getFieldAccess().getIndex("d"));
+        put(ItemGroup.TRANSPORTATION, accessor.getFieldAccess().getIndex("e"));
+        put(ItemGroup.MISC, accessor.getFieldAccess().getIndex("f"));
+        put(ItemGroup.SEARCH, accessor.getFieldAccess().getIndex("g"));
+        put(ItemGroup.FOOD, accessor.getFieldAccess().getIndex("h"));
+        put(ItemGroup.TOOLS, accessor.getFieldAccess().getIndex("i"));
+        put(ItemGroup.COMBAT, accessor.getFieldAccess().getIndex("j"));
+        put(ItemGroup.BREWING, accessor.getFieldAccess().getIndex("k"));
+        put(ItemGroup.HOTBAR, accessor.getFieldAccess().getIndex("m"));
+    }};
 
     public static Class<?> getClazz(){
         return accessor.getClazz();
     }
 
     public static Object get(ItemGroup itemGroup){
-        int field = -1;
-        switch (itemGroup){
-            case BUILDING_BLOCKS:
-                field = fBuildingBlocks;
-                break;
-            case DECORATIONS:
-                field = fDecorations;
-                break;
-            case REDSTONE:
-                field = fRedstone;
-                break;
-            case TRANSPORTATION:
-                field = fTransportation;
-                break;
-            case MISC:
-                field = fMisc;
-                break;
-            case SEARCH:
-                field = fSearch;
-                break;
-            case FOOD:
-                field = fFood;
-                break;
-            case TOOLS:
-                field = fTools;
-                break;
-            case COMBAT:
-                field = fCombat;
-                break;
-            case BREWING:
-                field = fBrewing;
-                break;
-            case HOTBAR:
-                field = fHotbar;
-                break;
-        }
+        int field = relationMap.getOrDefault(itemGroup, -1);
         if(field == -1)
             return null;
         return accessor.getFieldAccess().get(null, field);

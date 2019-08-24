@@ -1,6 +1,7 @@
 package de.ropemc.rv2.loader;
 
 import de.ropemc.rv2.api.mod.Mod;
+import de.ropemc.rv2.api.mod.ModInfo;
 import de.ropemc.rv2.api.mod.ModLoader;
 
 import java.io.File;
@@ -56,12 +57,7 @@ public class SimpleModLoader implements ModLoader {
     }
 
     public Mod getMod(String id){
-        for(Mod mod : mods){
-            if(mod.modInfo().getId().equals(id)){
-                return mod;
-            }
-        }
-        return null;
+        return mods.stream().filter(mod -> mod.modInfo().getId().equals(id)).findFirst().orElse(null);
     }
 
 }
