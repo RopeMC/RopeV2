@@ -7,10 +7,13 @@ import de.ropemc.rv2.util.ReflectAccessor;
 
 public enum ProtocolTypeImpl {
 
+    /*
     HANDSHAKING(accessor().getFieldAccess().getIndex("a")),
     PLAY(accessor().getFieldAccess().getIndex("b")),
     STATUS(accessor().getFieldAccess().getIndex("c")),
-    LOGIN(accessor().getFieldAccess().getIndex("d"));
+    LOGIN(accessor().getFieldAccess().getIndex("d"))
+    */
+    ;
 
     private static ReflectAccessor accessor;
 
@@ -20,7 +23,7 @@ public enum ProtocolTypeImpl {
         return accessor;
     }
 
-    private static int mRegisterPacket = accessor().getMethodAccess().getIndex("a", PacketDirectionImpl.getClazz(), Class.class);
+    //private static int mRegisterPacket = accessor().getMethodAccess().getIndex("a", PacketDirectionImpl.getClazz(), Class.class);
 
     private ProtocolType protocolType;
     private int field;
