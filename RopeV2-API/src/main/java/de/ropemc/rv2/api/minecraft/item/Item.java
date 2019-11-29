@@ -2,6 +2,8 @@ package de.ropemc.rv2.api.minecraft.item;
 
 import de.ropemc.rv2.api.MinecraftWrapperFactory;
 import de.ropemc.rv2.api.Rope;
+import lombok.Getter;
+import lombok.experimental.Delegate;
 
 public class Item {
 
@@ -9,6 +11,8 @@ public class Item {
         return Rope.getRopeMC().getImplementation(MinecraftWrapperFactory.class);
     }
 
+    @Delegate
+    @Getter
     protected Wrapper wrapper;
 
     public Item(Properties properties){
@@ -21,10 +25,6 @@ public class Item {
 
     public Item(Object handle){
         wrapper = getMinecraftWrapperFactory().item(handle);
-    }
-
-    public Wrapper getWrapper(){
-        return wrapper;
     }
 
     public interface Wrapper {

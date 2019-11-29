@@ -1,38 +1,24 @@
 package de.ropemc.rv2.api.event.input;
 
 import de.ropemc.rv2.api.event.Event;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@AllArgsConstructor
 public class KeyEvent extends Event {
-
+    @Getter
     private Key key;
+    @Getter
     private Action action;
     private int modifiers;
 
-    public KeyEvent(Key key, Action action, int modifiers){
-        this.key = key;
-        this.action = action;
-        this.modifiers = modifiers;
-    }
-
-    public Key getKey(){
-        return key;
-    }
-
-    public Action getAction(){
-        return action;
-    }
-
+    @AllArgsConstructor
+    @Getter
     public enum Action {
         KEY_DOWN(1),
         KEY_HOLD(2),
         KEY_UP(0);
         private int code;
-        Action(int code){
-            this.code = code;
-        }
-        public int getCode(){
-            return code;
-        }
         public static Action get(int code){
             for(Action action : values()){
                 if(action.getCode() == code){
@@ -43,6 +29,8 @@ public class KeyEvent extends Event {
         }
     }
 
+    @AllArgsConstructor
+    @Getter
     public enum Key {
         D0(48),
         D1(49),
@@ -88,12 +76,6 @@ public class KeyEvent extends Event {
         RIGHT(262),
         ESCAPE(256);
         private int code;
-        Key(int code){
-            this.code = code;
-        }
-        public int getCode(){
-            return code;
-        }
         public static Key get(int code){
             for(Key key : values()){
                 if(key.getCode() == code){

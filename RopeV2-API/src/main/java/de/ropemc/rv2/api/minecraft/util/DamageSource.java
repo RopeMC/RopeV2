@@ -2,6 +2,8 @@ package de.ropemc.rv2.api.minecraft.util;
 
 import de.ropemc.rv2.api.MinecraftWrapperFactory;
 import de.ropemc.rv2.api.Rope;
+import lombok.Getter;
+import lombok.experimental.Delegate;
 
 public class DamageSource {
 
@@ -9,6 +11,8 @@ public class DamageSource {
         return Rope.getRopeMC().getImplementation(MinecraftWrapperFactory.class);
     }
 
+    @Delegate
+    @Getter
     private Wrapper wrapper;
 
     public DamageSource(String name) {
@@ -17,14 +21,6 @@ public class DamageSource {
 
     public DamageSource(Object handle) {
         this.wrapper = getMinecraftWrapperFactory().damageSource(handle);
-    }
-
-    public Wrapper getWrapper() {
-        return wrapper;
-    }
-
-    public String getDamageType() {
-        return wrapper.getDamageType();
     }
 
     public interface Wrapper {

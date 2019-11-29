@@ -4,6 +4,8 @@ import de.ropemc.rv2.api.MinecraftWrapperFactory;
 import de.ropemc.rv2.api.Rope;
 import de.ropemc.rv2.api.minecraft.block.material.Material;
 import de.ropemc.rv2.api.minecraft.block.material.MaterialColor;
+import lombok.Getter;
+import lombok.experimental.Delegate;
 
 public class Block {
 
@@ -11,6 +13,8 @@ public class Block {
         return Rope.getRopeMC().getImplementation(MinecraftWrapperFactory.class);
     }
 
+    @Delegate
+    @Getter
     private Wrapper wrapper;
 
     public Block(Object handle){
@@ -21,24 +25,19 @@ public class Block {
         wrapper = getMinecraftWrapperFactory().block(properties);
     }
 
-    public Wrapper getWrapper(){
-        return wrapper;
-    }
-
     public interface Wrapper {
 
     }
 
     public static class Properties {
+        @Delegate
+        @Getter
         private Wrapper wrapper;
         public Properties(Object handle){
             wrapper = getMinecraftWrapperFactory().blockProperties(handle);
         }
         public Properties(Material material, MaterialColor materialColor){
             wrapper = getMinecraftWrapperFactory().blockProperties(material, materialColor);
-        }
-        public Wrapper getWrapper(){
-            return wrapper;
         }
         public interface Wrapper {
 

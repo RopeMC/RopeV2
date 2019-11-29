@@ -2,6 +2,8 @@ package de.ropemc.rv2.api.minecraft.util.text;
 
 import de.ropemc.rv2.api.MinecraftWrapperFactory;
 import de.ropemc.rv2.api.Rope;
+import lombok.Getter;
+import lombok.experimental.Delegate;
 
 public class StringTextComponent implements TextComponent {
 
@@ -9,6 +11,8 @@ public class StringTextComponent implements TextComponent {
         return Rope.getRopeMC().getImplementation(MinecraftWrapperFactory.class);
     }
 
+    @Delegate
+    @Getter
     private Wrapper wrapper;
 
     public StringTextComponent(String text) {
@@ -17,18 +21,6 @@ public class StringTextComponent implements TextComponent {
 
     public StringTextComponent(Object handle) {
         this.wrapper = getMinecraftWrapperFactory().stringTextComponent(handle);
-    }
-
-    public String getText() {
-        return wrapper.getText();
-    }
-
-    public Wrapper getWrapper() {
-        return wrapper;
-    }
-
-    public Object getHandle() {
-        return wrapper.getHandle();
     }
 
     public interface Wrapper extends TextComponent {

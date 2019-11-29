@@ -2,6 +2,8 @@ package de.ropemc.rv2.api.minecraft.util.math;
 
 import de.ropemc.rv2.api.MinecraftWrapperFactory;
 import de.ropemc.rv2.api.Rope;
+import lombok.Getter;
+import lombok.experimental.Delegate;
 
 public class Vec3i {
 
@@ -9,6 +11,8 @@ public class Vec3i {
         return Rope.getRopeMC().getImplementation(MinecraftWrapperFactory.class);
     }
 
+    @Delegate
+    @Getter
     private Wrapper wrapper;
 
     public Vec3i(int x, int y, int z) {
@@ -21,22 +25,6 @@ public class Vec3i {
 
     public Vec3i(Object handle) {
         this.wrapper = getMinecraftWrapperFactory().vec3i(handle);
-    }
-
-    public int getX() {
-        return wrapper.getX();
-    }
-
-    public int getY() {
-        return wrapper.getY();
-    }
-
-    public int getZ() {
-        return wrapper.getZ();
-    }
-
-    public Wrapper getWrapper() {
-        return wrapper;
     }
 
     public interface Wrapper {

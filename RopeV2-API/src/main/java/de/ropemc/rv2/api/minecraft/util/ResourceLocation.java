@@ -2,6 +2,8 @@ package de.ropemc.rv2.api.minecraft.util;
 
 import de.ropemc.rv2.api.MinecraftWrapperFactory;
 import de.ropemc.rv2.api.Rope;
+import lombok.Getter;
+import lombok.experimental.Delegate;
 
 public class ResourceLocation {
 
@@ -9,6 +11,8 @@ public class ResourceLocation {
         return Rope.getRopeMC().getImplementation(MinecraftWrapperFactory.class);
     }
 
+    @Delegate
+    @Getter
     private Wrapper wrapper;
 
     public ResourceLocation(String id){
@@ -21,18 +25,6 @@ public class ResourceLocation {
 
     public ResourceLocation(Object handle){
         wrapper = getMinecraftWrapperFactory().resourceLocation(handle);
-    }
-
-    public String getNamespace(){
-        return wrapper.getNamespace();
-    }
-
-    public String getPath(){
-        return wrapper.getPath();
-    }
-
-    public Wrapper getWrapper(){
-        return wrapper;
     }
 
     public interface Wrapper {

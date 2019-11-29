@@ -1,8 +1,13 @@
 package de.ropemc.rv2.api.mod;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.Locale;
 import java.util.Objects;
 
+@AllArgsConstructor
+@Getter
 public class ModInfo {
 
     private String id;
@@ -12,29 +17,6 @@ public class ModInfo {
 
     public ModInfo(String name, String version, String author) {
         this(name, name, version, author);
-    }
-
-    public ModInfo(String id, String name, String version, String author) {
-        this.id = makeIdValid(id);
-        this.name = name;
-        this.version = version;
-        this.author = author;
-    }
-
-    public String getId(){
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getVersion() {
-        return version;
-    }
-
-    public String getAuthor() {
-        return author;
     }
 
     private String makeIdValid(String raw){
